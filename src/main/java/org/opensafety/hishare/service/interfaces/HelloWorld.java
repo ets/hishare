@@ -1,4 +1,4 @@
-package org.opensafety.hishare.interfaces;
+package org.opensafety.hishare.service.interfaces;
 
 public interface HelloWorld
 {
