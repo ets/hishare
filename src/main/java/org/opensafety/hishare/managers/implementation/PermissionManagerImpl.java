@@ -1,5 +1,7 @@
 package org.opensafety.hishare.managers.implementation;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.opensafety.hishare.dao.interfaces.ParcelDao;
 import org.opensafety.hishare.dao.interfaces.PermissionDao;
 import org.opensafety.hishare.dao.interfaces.UserDao;
@@ -14,17 +16,12 @@ public class PermissionManagerImpl implements PermissionManager
 {
 	@Autowired
 	PermissionDao permissionDao;
-	@Autowired
-	UserDao userDao;
-	@Autowired
-	ParcelDao parcelDao;
+	
+	private Log log = LogFactory.getLog(this.getClass());
 
-	public void addPermission(Parcel parcel, User user,
-            PermissionLevel permissionLevel)
+	public void persistPermission(Permission permission)
     {
-		Permission permission = new Permission(parcel, user, permissionLevel);
-		permission = permissionDao.addPermission(permission);
-		parcel.addPermission(permission);
-		user.addPermission(permission);
+		log.info("Persisting Permission");
+		permissionDao.addPermission(permission);
     }
 }

@@ -22,32 +22,14 @@ public class ParcelManagerImpl implements ParcelManager
 	
 	private Map<String, Parcel> parcelUploads;
 	
-	public static String createPayloadLocation()
-	{
-		return UUID.randomUUID().toString();
-	}
-	
-	public static String createParcelPassword()
-	{
-		return Long.toHexString(UUID.randomUUID().getLeastSignificantBits());
-	}
-	
 	public ParcelManagerImpl()
 	{
 		parcelUploads = new HashMap<String, Parcel>();
 	}
-
-	public Parcel createParcel(String parcelName, Integer daysToLive)
-	{
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DATE, daysToLive);
-		Parcel newParcel = new Parcel(Parcel.createParcelId(), parcelName, calendar.getTime(), createParcelPassword(), createPayloadLocation());
-		return newParcel;
-	}
 	
-	public Parcel addParcel(Parcel parcel)
+	public void persistParcel(Parcel parcel)
 	{
-		return parcelDao.addParcel(parcel);
+		parcelDao.addParcel(parcel);
 	}
 
 	public void beginUpload(String transferKey, Parcel parcel)
@@ -58,5 +40,10 @@ public class ParcelManagerImpl implements ParcelManager
 	public Parcel closeUpload(String transferKey)
 	{
 		return parcelUploads.remove(transferKey);
+    }
+
+	public void updateParcel(Parcel parcel)
+    {
+		parcelDao.updateParcel(parcel);
     }
 }

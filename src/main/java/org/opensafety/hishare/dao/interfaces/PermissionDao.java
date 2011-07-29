@@ -4,7 +4,6 @@ import org.opensafety.hishare.model.Permission;
 
 public interface PermissionDao
 {
-
-	Permission addPermission(Permission permission);
-	
+	void addPermission(Permission permission);
+	void updatePermission(Permission permission);
 }

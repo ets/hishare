@@ -28,13 +28,9 @@ public class HibernateUserDao extends HibernateDaoSupport implements UserDao
 							.uniqueResult() != null;
     }
 
-	public User addUser(User user)
+	public void addUser(User user)
     {
-		User newUser = new User(user);
-		
-		newUser.setId((Long)getSession().save(newUser));
-		
-		return newUser;
+		getSession().save(user);
     }
 
 	public User getByName(String username)

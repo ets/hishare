@@ -93,6 +93,22 @@
 		autowire="byName">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
+	<!-- Factory Beans -->
+	<bean id="parcelFactory"
+    class="org.opensafety.hishare.model.factories.ParcelFactory"
+    autowire="byName">
+  </bean>
+
+  <bean id="permissionFactory"
+    class="org.opensafety.hishare.model.factories.PermissionFactory"
+    autowire="byName">
+  </bean>
+
+  <bean id="userFactory"
+    class="org.opensafety.hishare.model.factories.UserFactory"
+    autowire="byName">
+  </bean>
 
 	<!-- Manager Beans -->
 	<bean id="parcelManager"

@@ -24,9 +24,6 @@ public class User
 	@Column
 	String authenticationId;
 	
-	@OneToMany
-	Set<Permission> permissions;
-	
 	public User()
 	{
 	}
@@ -34,7 +31,6 @@ public class User
 	public User(String username)
 	{
 		this.username = username;
-		this.permissions = new HashSet<Permission>();
 	}
 	
 	public User(User u)
@@ -42,15 +38,6 @@ public class User
 		this.id = u.getId();
 		this.username = u.getUsername();
 		this.authenticationId = u.getAuthenticationId();
-		
-		if(u.permissions != null)
-		{
-			this.permissions = new HashSet<Permission>(u.getPermissions());
-		}
-		else
-		{
-			this.permissions = new HashSet<Permission>();
-		}
 	}
 	
 	public Long getId()
@@ -82,21 +69,4 @@ public class User
     {
     	this.authenticationId = authenticationId;
     }
-	
-	public Set<Permission> getPermissions()
-    {
-    	return permissions;
-    }
-
-	public void setPermissions(Set<Permission> permissions)
-    {
-    	this.permissions = permissions;
-    }
-
-	public void addPermission(Permission permission)
-    {
-		this.permissions.add(permission);
-    }
-	
-	
 }

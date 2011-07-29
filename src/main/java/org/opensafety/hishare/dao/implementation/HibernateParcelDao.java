@@ -23,10 +23,9 @@ public class HibernateParcelDao extends HibernateDaoSupport implements ParcelDao
 				.add(Restrictions.eq("id", id));
 	}
 	
-	public Parcel addParcel(Parcel parcel)
+	public void addParcel(Parcel parcel)
 	{
 		getSessionFactory().getCurrentSession().save(parcel);
-		return parcel;
 	}
 	
 	public void updateParcel(Parcel parcel)

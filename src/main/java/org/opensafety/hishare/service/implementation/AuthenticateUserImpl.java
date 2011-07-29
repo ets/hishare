@@ -1,6 +1,8 @@
 package org.opensafety.hishare.service.implementation;
 
 import org.opensafety.hishare.managers.interfaces.UserManager;
+import org.opensafety.hishare.model.User;
+import org.opensafety.hishare.model.factories.UserFactory;
 import org.opensafety.hishare.service.interfaces.AuthenticateUser;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -8,6 +10,8 @@ public class AuthenticateUserImpl implements AuthenticateUser
 {
 	@Autowired
 	private UserManager userManager;
+	@Autowired
+	private UserFactory userFactory;
 	
 	public AuthenticateUserImpl()
 	{
@@ -17,10 +21,11 @@ public class AuthenticateUserImpl implements AuthenticateUser
     {
 		if(!userManager.userExists(username))
 		{
-			userManager.addUser(username);
+			User newUser = userFactory.createUser(username);
+			userManager.persistUser(newUser);
 		}
 		
-		String authId = userManager.authenticateUser(username);
+		String authId = userManager.renewUserAuthentication(username);
 		
 		return authId;
     }

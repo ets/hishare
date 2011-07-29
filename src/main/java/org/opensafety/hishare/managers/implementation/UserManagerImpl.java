@@ -22,17 +22,18 @@ public class UserManagerImpl implements UserManager
     {
 	    return userDao.userExists(username);
     }
-
-	public User addUser(String username)
+	
+	public void persistUser(User user)
     {
-		User newUser = new User(username);
-		
-		newUser = userDao.addUser(newUser);
-		
-	    return newUser;
+		userDao.addUser(user);
     }
+	
+	public void updateUser(User user)
+	{
+		userDao.updateUser(user);
+	}
 
-	public String authenticateUser(String username)
+	public String renewUserAuthentication(String username)
     {
 		User authenticatee = userDao.getByName(username);
 		authenticatee.setAuthenticationId(UUID.randomUUID().toString());
@@ -40,7 +41,7 @@ public class UserManagerImpl implements UserManager
 		return authenticatee.getAuthenticationId();
     }
 
-	public boolean verifyUser(String username, String authenticationId)
+	public boolean verifyAuthentication(String username, String authenticationId)
     {
 	    User user = userDao.getByName(username);
 	    return user.getAuthenticationId().equals(authenticationId);

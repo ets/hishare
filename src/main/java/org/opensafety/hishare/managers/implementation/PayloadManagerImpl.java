@@ -80,7 +80,7 @@ public class PayloadManagerImpl implements PayloadManager
 		return null;
 	}
 
-	public boolean storePayload(Parcel parcel, byte[] payload)
+	public boolean persistPayload(Parcel parcel, byte[] payload)
     {
 		return payloadDao.savePayload(parcel.getPayloadLocation(), payload);
     }

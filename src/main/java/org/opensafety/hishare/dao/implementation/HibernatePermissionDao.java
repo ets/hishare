@@ -16,9 +16,15 @@ public class HibernatePermissionDao extends HibernateDaoSupport implements Permi
 {
 	private Log log = LogFactory.getLog(this.getClass());
 
-	public Permission addPermission(Permission permission)
+	public void addPermission(Permission permission)
     {
-	    // TODO Auto-generated method stub
-	    return null;
+		log.info("Saving Permission");
+		getSession().save(permission);
     }
+	
+	public void updatePermission(Permission permission)
+	{
+		log.info("Updating Permission");
+		getSession().merge(permission);
+	}
 }

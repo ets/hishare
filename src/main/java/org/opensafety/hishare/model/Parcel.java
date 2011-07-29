@@ -34,9 +34,6 @@ public class Parcel
 	@Column
 	private boolean dead;
 	
-	@OneToMany
-	private Set<Permission> permissions;
-	
 	public static String createParcelId()
 	{
 		return UUID.randomUUID().toString();
@@ -50,7 +47,6 @@ public class Parcel
 		payloadLocation = "";
 		expirationDate = new Date();
 		dead = false;
-		permissions = new HashSet<Permission>();
 	}
 	
 	public Parcel(String id, String name, Date expirationDate, String password, String payloadLocation)
@@ -61,7 +57,6 @@ public class Parcel
 		this.payloadLocation = payloadLocation;
 		this.expirationDate = expirationDate;
 		this.dead = false;
-		permissions = new HashSet<Permission>();
 	}
 	
 	public String getId()
@@ -122,20 +117,5 @@ public class Parcel
 	public void setDead(boolean dead)
 	{
 		this.dead = dead;
-	}
-	
-	public Set<Permission> getPermissions()
-	{
-		return permissions;
-	}
-	
-	public void setPermissions(Set<Permission> permissions)
-	{
-		this.permissions = permissions;
-	}
-	
-	public void addPermission(Permission permission)
-	{
-		this.permissions.add(permission);
 	}
 }

@@ -4,9 +4,17 @@ import org.opensafety.hishare.model.User;
 
 public interface UserManager
 {
-	boolean userExists(String username);
-	User addUser(String username);
-	String authenticateUser(String username);
-	boolean verifyUser(String username, String authenticationId);
+	/*Persistence*/
+	void persistUser(User user);
+	
+	void updateUser(User owner);
+
 	User getByUsername(String username);
+	
+	boolean userExists(String username);
+	
+	/*Authentication*/
+	String renewUserAuthentication(String username);
+	
+	boolean verifyAuthentication(String username, String authenticationId);
 }
