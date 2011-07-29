@@ -1,4 +1,5 @@
 ## HiShare specific ignores
+Parcels/*
 
 ## Eclipse/Spring/Maven ignores
 target

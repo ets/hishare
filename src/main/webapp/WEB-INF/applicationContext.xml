@@ -12,6 +12,9 @@
      http://www.springframework.org/schema/aop 
      http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
+	<context:annotation-config />
+
+	<!-- Property Configurations -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
@@ -22,14 +25,21 @@
 	</bean>
 
 
-	<!-- DataSource: hsqldb file -->
+	<!-- DataSource: MySQL DB -->
 	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url"
-			value="jdbc:mysql://localhost/testDB" />
-		<property name="username" value="root" />
-		<property name="password" value="" />
+		<property name="driverClassName">
+			<value>${jdbc.driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="username">
+			<value>${jdbc.username}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc.password}</value>
+		</property>
 	</bean>
 
 	<!-- Hibernate -->
@@ -37,15 +47,17 @@
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="myDataSource" />
 		<property name="annotatedClasses">
-      <list>
-        <value>org.opensafety.hishare.model.Parcel</value>
-      </list>
-    </property>
-    <property name="hibernateProperties">
+			<list>
+				<value>org.opensafety.hishare.model.Parcel</value>
+				<value>org.opensafety.hishare.model.User</value>
+				<value>org.opensafety.hishare.model.Permission</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">create</prop>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 			</props>
 		</property>
 	</bean>
@@ -55,27 +67,108 @@
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
-	<tx:annotation-driven transaction-manager="transactionManager"/>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<!-- Dao Beans -->
 	<bean id="parcelDao"
-		class="org.opensafety.hishare.dao.implementation.HibernateParcelDao">
+		class="org.opensafety.hishare.dao.implementation.HibernateParcelDao"
+		autowire="byName">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	 <bean id="payloadDao"
+    class="org.opensafety.hishare.dao.implementation.FilePayloadDao"
+    autowire="byName">
+  </bean>
+
+	<bean id="permissionDao"
+		class="org.opensafety.hishare.dao.implementation.HibernatePermissionDao"
+		autowire="byName">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<!-- Service Beans -->
-	<bean id="helloWorld"
-		class="org.opensafety.hishare.service.implementation.HelloWorldImpl">
-		<property name="parcelDao" ref="parcelDao" />
+	<bean id="userDao"
+		class="org.opensafety.hishare.dao.implementation.HibernateUserDao"
+		autowire="byName">
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
+	<!-- Manager Beans -->
+	<bean id="parcelManager"
+		class="org.opensafety.hishare.managers.implementation.ParcelManagerImpl"
+		autowire="byName">
+	</bean>
+	
+	 <bean id="payloadManager"
+    class="org.opensafety.hishare.managers.implementation.PayloadManagerImpl"
+    autowire="byName">
+  </bean>
+
+	<bean id="permissionManager"
+		class="org.opensafety.hishare.managers.implementation.PermissionManagerImpl"
+		autowire="byName">
+	</bean>
+
+	<bean id="userManager"
+		class="org.opensafety.hishare.managers.implementation.UserManagerImpl"
+		autowire="byName">
+	</bean>
+
+	<!-- Service Beans -->
+	<bean id="authenticateUser"
+		class="org.opensafety.hishare.service.implementation.AuthenticateUserImpl">
+	</bean>
+
+	<bean id="authorizeUser"
+		class="org.opensafety.hishare.service.implementation.AuthorizeUserImpl">
+	</bean>
+
+	<bean id="deleteParcel"
+		class="org.opensafety.hishare.service.implementation.DeleteParcelImpl">
+	</bean>
+
+	<bean id="downloadParcel"
+		class="org.opensafety.hishare.service.implementation.DownloadParcelImpl">
+	</bean>
+
+	<bean id="uploadParcel"
+		class="org.opensafety.hishare.service.implementation.UploadParcelImpl">
+	</bean>
 
 	<!-- Service Exporters -->
-	<bean name="helloWorldExporter"
+	<bean name="authenticateUserExporter"
 		class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="helloWorld" />
-		<property name="serviceInterface"
-			value="org.opensafety.hishare.service.interfaces.HelloWorld" />
+		<property name="service" ref="authenticateUser" />
+		<property name="ServiceInterface"
+			value="org.opensafety.hishare.service.interfaces.AuthenticateUser" />
+	</bean>
+
+	<bean name="authorizeUserExporter"
+		class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="authorizeUser" />
+		<property name="ServiceInterface"
+			value="org.opensafety.hishare.service.interfaces.AuthorizeUser" />
+	</bean>
+
+	<bean name="deleteParcelExporter"
+		class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="deleteParcel" />
+		<property name="ServiceInterface"
+			value="org.opensafety.hishare.service.interfaces.DeleteParcel" />
+	</bean>
+
+	<bean name="downloadParcelExporter"
+		class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="downloadParcel" />
+		<property name="ServiceInterface"
+			value="org.opensafety.hishare.service.interfaces.DownloadParcel" />
+	</bean>
+
+	<bean name="uploadParcelExporter"
+		class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="uploadParcel" />
+		<property name="ServiceInterface"
+			value="org.opensafety.hishare.service.interfaces.UploadParcel" />
 	</bean>
 </beans>

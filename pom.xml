@@ -102,11 +102,11 @@
 
 	<dependencies>
 
-    <dependency>
-      <groupId>${jdbc.groupId}</groupId>
-      <artifactId>${jdbc.artifactId}</artifactId>
-      <version>${jdbc.version}</version>
-    </dependency>
+		<dependency>
+			<groupId>${jdbc.groupId}</groupId>
+			<artifactId>${jdbc.artifactId}</artifactId>
+			<version>${jdbc.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -266,6 +266,17 @@
 			<version>${javassist.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openid4java</groupId>
+			<artifactId>openid4java-consumer</artifactId>
+			<!--artifactId>openid4java-server</artifactId -->
+			<!--artifactId>openid4java-infocard</artifactId -->
+			<!--artifactId>openid4java-xri</artifactId -->
+			<!--artifactId>openid4java</artifactId -->
+			<!--artifactId>openid4java-full</artifactId -->
+			<version>0.9.6</version>
+			<type>pom</type>
 		</dependency>
 
 	</dependencies>

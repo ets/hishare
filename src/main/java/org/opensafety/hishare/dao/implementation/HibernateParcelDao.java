@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.criterion.Restrictions;
 
 import org.opensafety.hishare.model.Parcel;
 import org.opensafety.hishare.dao.interfaces.ParcelDao;
@@ -18,22 +19,18 @@ public class HibernateParcelDao extends HibernateDaoSupport implements ParcelDao
 	
 	public Parcel getById(Long id)
 	{
-		return (Parcel) getSessionFactory().getCurrentSession().createQuery(
-				"from Parcel parcel where parcel.id=?").setParameter(0, id)
-				.uniqueResult();
+		return (Parcel) getSessionFactory().getCurrentSession().createCriteria(Parcel.class)
+				.add(Restrictions.eq("id", id));
 	}
 	
-	public Parcel createParcel(Parcel parcel)
+	public Parcel addParcel(Parcel parcel)
 	{
-		log.info("CREATING PARCEL");
 		getSessionFactory().getCurrentSession().save(parcel);
-		log.info("Done Creating Parcel");
-		
-		return null;
+		return parcel;
 	}
 	
-	public void checkHPD()
+	public void updateParcel(Parcel parcel)
 	{
-		log.info("Test call to HPD Succeeded");
+		getSession().merge(parcel);
 	}
 }

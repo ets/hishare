@@ -4,22 +4,62 @@
 
 <web-app>
 
+	<display-name>Archetype Created Web Application</display-name>
 
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 
-  <display-name>Archetype Created Web Application</display-name>
-  
-  <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>  
-  </listener>  
-  
-  <servlet>
-    <servlet-name>helloWorldExporter</servlet-name>
+	<!-- Servlets -->
+	<servlet>
+		<servlet-name>authenticateUserExporter</servlet-name>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>authorizeUserExporter</servlet-name>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+	</servlet>
+	
+	 <servlet>
+    <servlet-name>deleteParcelExporter</servlet-name>
     <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
   </servlet>
+
+	<servlet>
+		<servlet-name>downloadParcelExporter</servlet-name>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>uploadParcelExporter</servlet-name>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+	</servlet>
+
+	<!-- Servlet Mappings -->
+	<servlet-mapping>
+		<servlet-name>authenticateUserExporter</servlet-name>
+		<url-pattern>/user/authenticate</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>authorizeUserExporter</servlet-name>
+		<url-pattern>/user/authorize</url-pattern>
+	</servlet-mapping>
 	
-  <servlet-mapping>
-    <servlet-name>helloWorldExporter</servlet-name>
-    <url-pattern>/remoting/hello</url-pattern>
+	 <servlet-mapping>
+    <servlet-name>deleteParcelExporter</servlet-name>
+    <url-pattern>/parcel/delete</url-pattern>
   </servlet-mapping>
-  
+
+	<servlet-mapping>
+		<servlet-name>downloadParcelExporter</servlet-name>
+		<url-pattern>/parcel/download</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>uploadParcelExporter</servlet-name>
+		<url-pattern>/parcel/upload</url-pattern>
+	</servlet-mapping>
+
 </web-app>
