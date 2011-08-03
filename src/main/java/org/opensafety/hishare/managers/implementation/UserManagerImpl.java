@@ -12,11 +12,6 @@ public class UserManagerImpl implements UserManager
 {
 	@Autowired
 	UserDao userDao;
-
-	private static String createAuthenticationId()
-	{
-		return UUID.randomUUID().toString();
-	}
 	
 	public boolean userExists(String username)
     {

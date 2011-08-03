@@ -13,4 +13,12 @@ public interface PayloadManager
 	Boolean uploadChunk(String transferKey, byte[] chunk);
 
 	byte[] resolveUpload(String transferKey);
+
+	String beginDownload(Parcel parcel);
+
+	boolean downloadAvailable(String transferKey);
+	
+	public byte[] downloadPayload(Parcel parcel);
+
+	boolean deletePayload(String payloadLocation);
 }

@@ -15,7 +15,6 @@ import javax.persistence.Table;
 public class User
 {
 	@Id
-	@GeneratedValue
 	Long id;
 	
 	@Column(unique=true)
@@ -28,8 +27,9 @@ public class User
 	{
 	}
 	
-	public User(String username)
+	public User(Long id, String username)
 	{
+		this.id = id;
 		this.username = username;
 	}
 	

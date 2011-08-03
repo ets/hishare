@@ -27,6 +27,14 @@ public class HibernateUserDao extends HibernateDaoSupport implements UserDao
 							.setMaxResults(1)
 							.uniqueResult() != null;
     }
+	
+	public boolean userExists(Long id)
+    {
+		return getSession().createCriteria(User.class)
+							.add(Restrictions.eq("id",id))
+							.setMaxResults(1)
+							.uniqueResult() != null;
+    }
 
 	public void addUser(User user)
     {

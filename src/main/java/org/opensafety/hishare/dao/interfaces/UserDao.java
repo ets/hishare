@@ -8,6 +8,8 @@ public interface UserDao
 	
 	boolean userExists(String username);
 	
+	boolean userExists(Long id);
+	
 	void addUser(User user);
 	
 	void updateUser(User user);

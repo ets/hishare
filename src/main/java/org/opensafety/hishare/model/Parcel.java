@@ -1,5 +1,8 @@
 package org.opensafety.hishare.model;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "parcels")
@@ -22,8 +26,14 @@ public class Parcel
 	@Column
 	private String name;
 	
-	@Column
+	@Transient
 	private String password;
+	
+	@Column
+	private byte[] hashedPassword;
+	
+	@Column
+	private byte[] salt;
 	
 	@Column
 	private String payloadLocation;
@@ -34,26 +44,26 @@ public class Parcel
 	@Column
 	private boolean dead;
 	
-	public static String createParcelId()
-	{
-		return UUID.randomUUID().toString();
-	}
-	
 	public Parcel()
 	{
 		id = null;
 		name = "";
 		password = "";
+		hashedPassword = null;
+		salt = null;
 		payloadLocation = "";
 		expirationDate = new Date();
 		dead = false;
 	}
 	
-	public Parcel(String id, String name, Date expirationDate, String password, String payloadLocation)
+	public Parcel(String id, String name, Date expirationDate, String payloadLocation,
+	        String password, byte[] hashedPassword, byte[] salt)
 	{
 		this.id = id;
 		this.name = name;
 		this.password = password;
+		this.hashedPassword = hashedPassword;
+		this.salt = salt;
 		this.payloadLocation = payloadLocation;
 		this.expirationDate = expirationDate;
 		this.dead = false;
@@ -89,6 +99,16 @@ public class Parcel
 		this.password = password;
 	}
 	
+	public byte[] getHashedPassword()
+	{
+		return hashedPassword;
+	}
+	
+	public void setHashedPassword(byte[] hashedPassword)
+	{
+		this.hashedPassword = hashedPassword;
+	}
+	
 	public String getPayloadLocation()
 	{
 		return payloadLocation;
@@ -117,5 +137,15 @@ public class Parcel
 	public void setDead(boolean dead)
 	{
 		this.dead = dead;
+	}
+	
+	public byte[] getSalt()
+	{
+		return salt;
+	}
+	
+	public void setSalt(byte[] salt)
+	{
+		this.salt = salt;
 	}
 }

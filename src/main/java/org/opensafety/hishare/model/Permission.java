@@ -12,7 +12,6 @@ import javax.persistence.Table;
 public class Permission
 {
 	@Id
-	@GeneratedValue
 	Long id;
 	
 	@ManyToOne
@@ -28,8 +27,9 @@ public class Permission
 	{
 	}
 	
-	public Permission(Parcel parcel, User user, PermissionLevel permission)
+	public Permission(Long id, Parcel parcel, User user, PermissionLevel permission)
 	{
+		this.id = id;
 		this.user = user;
 		this.parcel = parcel;
 		this.permission = permission;

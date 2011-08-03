@@ -14,4 +14,6 @@ public interface UploadParcel
 	                          byte[] chunk);
 	
 	String finishParcelUpload(String username, String authenticationId, String transferKey);
+	
+	String[] uploadParcel(String username, String authenticationId, String parcelName, Integer daysToLive, byte[] payload);
 }

@@ -5,13 +5,31 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.opensafety.hishare.dao.interfaces.PayloadDao;
+import org.opensafety.hishare.model.Parcel;
+import org.opensafety.hishare.util.interfaces.Encryption;
+import org.opensafety.hishare.util.interfaces.Encryption.CryptographyException;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class FilePayloadDao implements PayloadDao
 {
+	@Autowired
+	Encryption encryption;
+	
 	private Log log;
 	
 	public FilePayloadDao()
@@ -19,25 +37,36 @@ public class FilePayloadDao implements PayloadDao
 		log = LogFactory.getLog(this.getClass());
 	}
 	
-	public boolean savePayload(String location, byte[] payload)
+	private static String specifyLocation(String payloadLocation)
     {
-		log.info("SAVING PAYLOAD: "+new String(payload)+" AT LOCATION: "+location);
+		return "Parcels/"+payloadLocation+".parcel";
+    }
+	
+	public boolean savePayload(Parcel parcel, byte[] payload)
+    {
+		log.info("SAVING PAYLOAD: "+new String(payload)+" AT LOCATION: "+parcel.getPayloadLocation());
 		
-		String specificLocation = "Parcels/"+location+".parcel";
+		byte[] encryptedPayload;
+        try
+        {
+	        encryptedPayload = encryption.encryptPayload(parcel,payload);
+        }
+        catch(Exception e)
+        {
+        	e.printStackTrace();
+	        return false;
+        }
+		
+		String specificLocation = specifyLocation(parcel.getPayloadLocation());
 		
 		FileOutputStream fileOut = null;
         try
         {
 	        fileOut = new FileOutputStream(specificLocation);
-	        fileOut.write(payload);
+	        fileOut.write(encryptedPayload);
 	        fileOut.close();
         }
-		catch(FileNotFoundException e)
-        {
-	        e.printStackTrace();
-	        return false;
-        }
-        catch(IOException e)
+		catch(Exception e)
         {
 	        e.printStackTrace();
 	        return false;
@@ -46,21 +75,21 @@ public class FilePayloadDao implements PayloadDao
 	    return true;
     }
 
-	public byte[] retrievePayload(String location)
+	public byte[] retrievePayload(Parcel parcel)
 	{
-		log.info("RETRIEVING PAYLOAD: "+location);
+		log.info("RETRIEVING PAYLOAD: "+parcel.getPayloadLocation());
 		
-		String specificLocation = "Parcels/"+location+".parcel";
+		String specificLocation = specifyLocation(parcel.getPayloadLocation());
 		
 		FileInputStream fileIn = null;
-		byte[] payload;
+		byte[] encryptedPayload;
 		
 		try
 		{
 			File file = new File(specificLocation);
 			fileIn = new FileInputStream(specificLocation);
-			payload = new byte[(int) file.length()];
-			fileIn.read(payload);
+			encryptedPayload = new byte[(int) file.length()];
+			fileIn.read(encryptedPayload);
 			fileIn.close();
         }
 		catch(FileNotFoundException e)
@@ -74,7 +103,24 @@ public class FilePayloadDao implements PayloadDao
 	        return null;
         }
 		
+		byte[] payload = null;
+        try
+        {
+	        payload = encryption.decryptPayload(parcel, encryptedPayload);
+        }
+        catch(CryptographyException e)
+        {
+	        e.printStackTrace();
+        }
+		
 		return payload;
+    }
+
+	public boolean deletePayload(String location)
+	{
+		String specificLocation = specifyLocation(location);
+		File file = new File(specificLocation);
+		return file.delete();
     }
 	
 }
