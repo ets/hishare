@@ -1,18 +1,10 @@
 package org.opensafety.hishare.model;
 
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -66,67 +58,7 @@ public class Parcel
 		this.salt = salt;
 		this.payloadLocation = payloadLocation;
 		this.expirationDate = expirationDate;
-		this.dead = false;
-	}
-	
-	public String getId()
-	{
-		return this.id;
-	}
-	
-	public void setId(String id)
-	{
-		this.id = id;
-	}
-	
-	public String getName()
-	{
-		return name;
-	}
-	
-	public void setName(String name)
-	{
-		this.name = name;
-	}
-	
-	public String getPassword()
-	{
-		return password;
-	}
-	
-	public void setPassword(String password)
-	{
-		this.password = password;
-	}
-	
-	public byte[] getHashedPassword()
-	{
-		return hashedPassword;
-	}
-	
-	public void setHashedPassword(byte[] hashedPassword)
-	{
-		this.hashedPassword = hashedPassword;
-	}
-	
-	public String getPayloadLocation()
-	{
-		return payloadLocation;
-	}
-	
-	public void setPayloadLocation(String location)
-	{
-		this.payloadLocation = location;
-	}
-	
-	public Date getExpirationDate()
-	{
-		return expirationDate;
-	}
-	
-	public void setExpirationDate(Date expirationDate)
-	{
-		this.expirationDate = expirationDate;
+		dead = false;
 	}
 	
 	public boolean getDead()
@@ -134,14 +66,74 @@ public class Parcel
 		return dead;
 	}
 	
-	public void setDead(boolean dead)
+	public Date getExpirationDate()
 	{
-		this.dead = dead;
+		return expirationDate;
+	}
+	
+	public byte[] getHashedPassword()
+	{
+		return hashedPassword;
+	}
+	
+	public String getId()
+	{
+		return id;
+	}
+	
+	public String getName()
+	{
+		return name;
+	}
+	
+	public String getPassword()
+	{
+		return password;
+	}
+	
+	public String getPayloadLocation()
+	{
+		return payloadLocation;
 	}
 	
 	public byte[] getSalt()
 	{
 		return salt;
+	}
+	
+	public void setDead(boolean dead)
+	{
+		this.dead = dead;
+	}
+	
+	public void setExpirationDate(Date expirationDate)
+	{
+		this.expirationDate = expirationDate;
+	}
+	
+	public void setHashedPassword(byte[] hashedPassword)
+	{
+		this.hashedPassword = hashedPassword;
+	}
+	
+	public void setId(String id)
+	{
+		this.id = id;
+	}
+	
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+	
+	public void setPassword(String password)
+	{
+		this.password = password;
+	}
+	
+	public void setPayloadLocation(String location)
+	{
+		payloadLocation = location;
 	}
 	
 	public void setSalt(byte[] salt)

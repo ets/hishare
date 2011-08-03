@@ -1,87 +1,85 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
-<!-- 
-    A template for the log4j config used by the maven-jetty plugin. Each developer maintains a custom version of this file.
-    You need a version named log4j.development.xml in your src/main/resources directory. 
--->
+<!-- A template for the log4j config used by the maven-jetty plugin. Each 
+	developer maintains a custom version of this file. You need a version named 
+	log4j.development.xml in your src/main/resources directory. -->
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
-    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
-        <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern"
-                value="%d{HH:mm:ss} %p [%t] %c{1}.%M(%L) | %m%n"/>
-        </layout>
-    </appender>
-    
-    <logger name="net.sf.ehcache">
-        <level value="WARN"/>
-    </logger>
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{HH:mm:ss} %p [%t] %c{1}.%M(%L) | %m%n" />
+		</layout>
+	</appender>
 
-    <logger name="org.apache">
-        <level value="WARN"/>
-    </logger>
+	<logger name="net.sf.ehcache">
+		<level value="WARN" />
+	</logger>
 
-    <logger name="org.apache.velocity">
-        <level value="FATAL"/>
-    </logger>
+	<logger name="org.apache">
+		<level value="WARN" />
+	</logger>
 
-    <logger name="org.tuckey">
-        <level value="FATAL"/>
-    </logger>
+	<logger name="org.apache.velocity">
+		<level value="FATAL" />
+	</logger>
 
-    <!-- Suppress invalid warning messages from JSF -->
-    <logger name="org.apache.myfaces.shared_impl.renderkit.html">
-        <level value="ERROR"/>
-    </logger>
-    <!-- Workaround https://issues.jasig.org/browse/CASC-105 -->
-    <logger name="org.jasig.cas.client.util.CommonUtils">
-        <level value="ERROR"/>
-    </logger>
+	<logger name="org.tuckey">
+		<level value="FATAL" />
+	</logger>
 
-    <logger name="org.jasig">
-        <level value="ERROR"/>
-    </logger>        
-  
-    <logger name="org.hibernate">
-        <level value="WARN"/>
-    </logger> 
-     
-    <logger name="org.hibernate.SQL">
-        <level value="WARN"/>
-    </logger>
-    
-    <logger name="org.hibernate.jdbc">
-        <level value="WARN"/>        
-    </logger>        
-    
-    <logger name="org.hibernate.criterion">
-        <level value="WARN"/>
-    </logger>
+	<!-- Suppress invalid warning messages from JSF -->
+	<logger name="org.apache.myfaces.shared_impl.renderkit.html">
+		<level value="ERROR" />
+	</logger>
+	<!-- Workaround https://issues.jasig.org/browse/CASC-105 -->
+	<logger name="org.jasig.cas.client.util.CommonUtils">
+		<level value="ERROR" />
+	</logger>
 
-    <logger name="org.springframework">
-        <level value="WARN"/>
-    </logger>
-     
-    <logger name="org.springframework.jmx">
-        <level value="WARN"/>
-    </logger>            
+	<logger name="org.jasig">
+		<level value="ERROR" />
+	</logger>
 
-    <logger name="org.springframework.security">
-        <level value="WARN"/>
-    </logger>
-               
-    <logger name="org.opensafety">
-        <level value="DEBUG"/>
-    </logger>
+	<logger name="org.hibernate">
+		<level value="WARN" />
+	</logger>
 
-    <!-- The logger used to render error message presented to the user -->
-    <logger name="Error.jsp">
-        <level value="DEBUG"/>
-    </logger>    
+	<logger name="org.hibernate.SQL">
+		<level value="WARN" />
+	</logger>
 
-     <root>
-        <level value="INFO"/>
-        <appender-ref ref="CONSOLE"/>
-    </root>
+	<logger name="org.hibernate.jdbc">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="org.hibernate.criterion">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="org.springframework">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="org.springframework.jmx">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="org.springframework.security">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="org.opensafety">
+		<level value="DEBUG" />
+	</logger>
+
+	<!-- The logger used to render error message presented to the user -->
+	<logger name="Error.jsp">
+		<level value="DEBUG" />
+	</logger>
+
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="CONSOLE" />
+	</root>
 
 </log4j:configuration>

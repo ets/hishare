@@ -1,9 +1,9 @@
-package org.opensafety.hishare.service.implementation;
+package org.opensafety.hishare.service.implementation.remoting;
 
-import org.opensafety.hishare.managers.interfaces.UserManager;
+import org.opensafety.hishare.managers.interfaces.remoting.UserManager;
 import org.opensafety.hishare.model.User;
 import org.opensafety.hishare.model.factories.UserFactory;
-import org.opensafety.hishare.service.interfaces.AuthenticateUser;
+import org.opensafety.hishare.service.interfaces.remoting.AuthenticateUser;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class AuthenticateUserImpl implements AuthenticateUser
@@ -16,9 +16,9 @@ public class AuthenticateUserImpl implements AuthenticateUser
 	public AuthenticateUserImpl()
 	{
 	}
-
+	
 	public String justAuthenticateMe(String username)
-    {
+	{
 		if(!userManager.userExists(username))
 		{
 			User newUser = userFactory.createUser(username);
@@ -28,6 +28,6 @@ public class AuthenticateUserImpl implements AuthenticateUser
 		String authId = userManager.renewUserAuthentication(username);
 		
 		return authId;
-    }
+	}
 	
 }

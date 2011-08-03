@@ -4,13 +4,13 @@ import org.opensafety.hishare.model.User;
 
 public interface UserDao
 {
+	void addUser(User user);
+	
 	User getByName(String username);
 	
-	boolean userExists(String username);
+	void updateUser(User user);
 	
 	boolean userExists(Long id);
 	
-	void addUser(User user);
-	
-	void updateUser(User user);
+	boolean userExists(String username);
 }

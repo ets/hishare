@@ -1,12 +1,11 @@
-package org.opensafety.hishare.service.implementation;
+package org.opensafety.hishare.service.implementation.remoting;
 
-import org.opensafety.hishare.managers.interfaces.ParcelManager;
-import org.opensafety.hishare.managers.interfaces.PayloadManager;
-import org.opensafety.hishare.managers.interfaces.PermissionManager;
-import org.opensafety.hishare.managers.interfaces.UserManager;
+import org.opensafety.hishare.managers.interfaces.remoting.ParcelManager;
+import org.opensafety.hishare.managers.interfaces.remoting.PermissionManager;
+import org.opensafety.hishare.managers.interfaces.remoting.UserManager;
 import org.opensafety.hishare.model.Parcel;
 import org.opensafety.hishare.model.User;
-import org.opensafety.hishare.service.interfaces.DeleteParcel;
+import org.opensafety.hishare.service.interfaces.remoting.DeleteParcel;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class DeleteParcelImpl implements DeleteParcel
@@ -23,8 +22,8 @@ public class DeleteParcelImpl implements DeleteParcel
 	private static final String unsuccessfullDelete = "The parcel could not be deleted";
 	
 	public String deleteParcel(String username, String authenticationId, String parcelId,
-                               String parcelPassword)
-    {
+	                           String parcelPassword)
+	{
 		if(userManager.verifyAuthentication(username, authenticationId))
 		{
 			if(parcelManager.verifyParcelAvailable(parcelId, parcelPassword))
@@ -32,7 +31,10 @@ public class DeleteParcelImpl implements DeleteParcel
 				User user = userManager.getByUsername(username);
 				Parcel parcel = parcelManager.getParcel(parcelId, parcelPassword);
 				
-				if(permissionManager.hasDeletePermission(user,parcel));
+				if(permissionManager.hasDeletePermission(user, parcel))
+				{
+					;
+				}
 				{
 					boolean deletePermissions = permissionManager.deletePermissions(parcel);
 					boolean deleteParcel = parcelManager.deleteParcel(parcel);
@@ -45,6 +47,6 @@ public class DeleteParcelImpl implements DeleteParcel
 			}
 		}
 		return genericCredentialsError;
-    }
+	}
 	
 }

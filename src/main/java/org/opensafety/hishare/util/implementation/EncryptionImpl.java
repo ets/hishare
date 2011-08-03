@@ -1,7 +1,5 @@
 package org.opensafety.hishare.util.implementation;
 
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -9,11 +7,8 @@ import java.security.Security;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
 
-import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
-import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.IvParameterSpec;
@@ -22,7 +17,6 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Hex;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-
 import org.opensafety.hishare.model.Parcel;
 import org.opensafety.hishare.util.interfaces.Encryption;
 
@@ -37,8 +31,13 @@ public class EncryptionImpl implements Encryption
 	private String pbeAlgorithm;
 	private String cipherAlgorithm;
 	private String keyGenerator;
-	private String keySpecAlgorithm;
 	private String hashAlgorithm;
+	
+	public EncryptionImpl()
+	{
+		this(64, 1000, 256, 256, "SHA1PRNG", "PBEWITHSHA256AND128BITAES-CBC-BC",
+		     "AES/CBC/PKCS5Padding", "AES", "AES", "SHA-512");
+	}
 	
 	public EncryptionImpl(int saltLength, int pbeIterationCount, int passwordLength,
 	        int pbeKeyLength, String randomAlgorithm, String pbeAlgorithm, String cipherAlgorithm,
@@ -55,32 +54,7 @@ public class EncryptionImpl implements Encryption
 		this.pbeAlgorithm = pbeAlgorithm;
 		this.cipherAlgorithm = cipherAlgorithm;
 		this.keyGenerator = keyGenerator;
-		this.keySpecAlgorithm = keySpecAlgorithm;
 		this.hashAlgorithm = hashAlgorithm;
-	}
-	
-	public EncryptionImpl()
-	{
-		this(64, 1000, 256, 256, "SHA1PRNG", "PBEWITHSHA256AND128BITAES-CBC-BC",
-		     "AES/CBC/PKCS5Padding", "AES", "AES", "SHA-512");
-	}
-	
-	public byte[] createSalt() throws CryptographyException
-	{
-		SecureRandom random;
-		try
-		{
-			random = SecureRandom.getInstance(randomAlgorithm);
-		}
-		catch(NoSuchAlgorithmException e)
-		{
-			throw new CryptographyException(e.getMessage());
-		}
-		
-		byte[] salt = new byte[saltLength];
-		random.nextBytes(salt);
-		
-		return salt;
 	}
 	
 	public String createPassword() throws CryptographyException
@@ -103,51 +77,55 @@ public class EncryptionImpl implements Encryption
 		return new String(Hex.encodeHex(raw));
 	}
 	
-	public byte[] hashPassword(String password, byte[] salt) throws CryptographyException
+	public byte[] createSalt() throws CryptographyException
 	{
+		SecureRandom random;
 		try
 		{
-			MessageDigest md = MessageDigest.getInstance(hashAlgorithm);
-			md.reset();
-			md.update(salt);
-			return md.digest(password.getBytes());
-		}
-		catch(Exception e)
-		{
-			throw new CryptographyException(e.getMessage());
-		}
-	}
-	
-	private SecretKey generateKey(String password, byte[] salt) throws CryptographyException
-	{
-		PBEKeySpec pbeKeySpec = new PBEKeySpec(password.toCharArray(), salt, pbeIterationCount,
-		                                       pbeKeyLength);
-		
-		SecretKeyFactory factory;
-		SecretKey tmp;
-		try
-		{
-			factory = SecretKeyFactory.getInstance(pbeAlgorithm);
-			tmp = factory.generateSecret(pbeKeySpec);
+			random = SecureRandom.getInstance(randomAlgorithm);
 		}
 		catch(NoSuchAlgorithmException e)
 		{
 			throw new CryptographyException(e.getMessage());
 		}
-		catch(InvalidKeySpecException e)
+		
+		byte[] salt = new byte[saltLength];
+		random.nextBytes(salt);
+		
+		return salt;
+	}
+	
+	public byte[]
+	        decryptPayload(Parcel parcel, byte[] encryptedPayload) throws CryptographyException
+	{
+		SecretKey secret;
+		IvParameterSpec ivSpec;
+		byte[] payload;
+		
+		Cipher encryptionCipher;
+		try
+		{
+			encryptionCipher = Cipher.getInstance(cipherAlgorithm);
+		}
+		catch(Exception e)
 		{
 			throw new CryptographyException(e.getMessage());
 		}
 		
-		SecretKey secret = new SecretKeySpec(tmp.getEncoded(), keyGenerator);
+		secret = generateKey(parcel.getPassword(), parcel.getSalt());
+		ivSpec = generateIv(parcel.getSalt());
 		
-		return secret;
-	}
-	
-	private IvParameterSpec generateIv(byte[] salt)
-	{
-		byte[] iv = Arrays.copyOfRange(salt, 0, 16);
-		return new IvParameterSpec(iv);
+		try
+		{
+			encryptionCipher.init(Cipher.DECRYPT_MODE, secret, ivSpec);
+			payload = encryptionCipher.doFinal(encryptedPayload);
+		}
+		catch(Exception e)
+		{
+			throw new CryptographyException(e.getMessage());
+		}
+		
+		return payload;
 	}
 	
 	public byte[] encryptPayload(Parcel parcel, byte[] payload) throws CryptographyException
@@ -182,36 +160,50 @@ public class EncryptionImpl implements Encryption
 		return encryptedPayload;
 	}
 	
-	public byte[]
-	        decryptPayload(Parcel parcel, byte[] encryptedPayload) throws CryptographyException
+	private IvParameterSpec generateIv(byte[] salt)
 	{
-		SecretKey secret;
-		IvParameterSpec ivSpec;
-		byte[] payload;
+		byte[] iv = Arrays.copyOfRange(salt, 0, 16);
+		return new IvParameterSpec(iv);
+	}
+	
+	private SecretKey generateKey(String password, byte[] salt) throws CryptographyException
+	{
+		PBEKeySpec pbeKeySpec = new PBEKeySpec(password.toCharArray(), salt, pbeIterationCount,
+		                                       pbeKeyLength);
 		
-		Cipher encryptionCipher;
+		SecretKeyFactory factory;
+		SecretKey tmp;
 		try
 		{
-			encryptionCipher = Cipher.getInstance(cipherAlgorithm);
+			factory = SecretKeyFactory.getInstance(pbeAlgorithm);
+			tmp = factory.generateSecret(pbeKeySpec);
+		}
+		catch(NoSuchAlgorithmException e)
+		{
+			throw new CryptographyException(e.getMessage());
+		}
+		catch(InvalidKeySpecException e)
+		{
+			throw new CryptographyException(e.getMessage());
+		}
+		
+		SecretKey secret = new SecretKeySpec(tmp.getEncoded(), keyGenerator);
+		
+		return secret;
+	}
+	
+	public byte[] hashPassword(String password, byte[] salt) throws CryptographyException
+	{
+		try
+		{
+			MessageDigest md = MessageDigest.getInstance(hashAlgorithm);
+			md.reset();
+			md.update(salt);
+			return md.digest(password.getBytes());
 		}
 		catch(Exception e)
 		{
 			throw new CryptographyException(e.getMessage());
 		}
-		
-		secret = generateKey(parcel.getPassword(), parcel.getSalt());
-		ivSpec = generateIv(parcel.getSalt());
-		
-		try
-		{
-			encryptionCipher.init(Cipher.DECRYPT_MODE, secret, ivSpec);
-			payload = encryptionCipher.doFinal(encryptedPayload);
-		}
-		catch(Exception e)
-		{
-			throw new CryptographyException(e.getMessage());
-		}
-		
-		return payload;
 	}
 }

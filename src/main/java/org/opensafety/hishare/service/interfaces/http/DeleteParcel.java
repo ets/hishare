@@ -1,4 +1,4 @@
-package org.opensafety.hishare.service.interfaces;
+package org.opensafety.hishare.service.interfaces.http;
 
 public interface DeleteParcel
 {

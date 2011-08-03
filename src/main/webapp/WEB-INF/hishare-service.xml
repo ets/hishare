@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-  xmlns:aop="http://www.springframework.org/schema/aop"
-  xmlns:context="http://www.springframework.org/schema/context" 
-  xmlns:tx="http://www.springframework.org/schema/tx"
-  xmlns:mvc="http://www.springframework.org/schema/mvc"
-  xsi:schemaLocation="
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
      http://www.springframework.org/schema/beans 
      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
      http://www.springframework.org/schema/context
@@ -19,22 +17,22 @@
 
 	<!-- Service Beans -->
 	<bean id="authenticateUser"
-		class="org.opensafety.hishare.service.implementation.AuthenticateUserImpl"
+		class="org.opensafety.hishare.service.implementation.http.AuthenticateUserImpl"
 		autowire="byName">
 	</bean>
 
 	<bean id="authorizeUser"
-		class="org.opensafety.hishare.service.implementation.AuthorizeUserImpl"
+		class="org.opensafety.hishare.service.implementation.http.AuthorizeUserImpl"
 		autowire="byName">
 	</bean>
 
 	<bean id="deleteParcel"
-		class="org.opensafety.hishare.service.implementation.DeleteParcelImpl"
+		class="org.opensafety.hishare.service.implementation.http.DeleteParcelImpl"
 		autowire="byName">
 	</bean>
 
 	<bean id="downloadParcel"
-		class="org.opensafety.hishare.service.implementation.DownloadParcelImpl"
+		class="org.opensafety.hishare.service.implementation.http.DownloadParcelImpl"
 		autowire="byName">
 		<constructor-arg>
 			<value>3</value> <!-- Brute Force Breaking Wait Time (in seconds) -->
@@ -42,45 +40,74 @@
 	</bean>
 
 	<bean id="uploadParcel"
-		class="org.opensafety.hishare.service.implementation.UploadParcelImpl"
+		class="org.opensafety.hishare.service.implementation.http.UploadParcelImpl"
+		autowire="byName">
+	</bean>
+
+	<!-- Remoting Service Beans -->
+	<bean id="authenticateUserRemoting"
+		class="org.opensafety.hishare.service.implementation.remoting.AuthenticateUserImpl"
+		autowire="byName">
+	</bean>
+
+	<bean id="authorizeUserRemoting"
+		class="org.opensafety.hishare.service.implementation.remoting.AuthorizeUserImpl"
+		autowire="byName">
+	</bean>
+
+	<bean id="deleteParcelRemoting"
+		class="org.opensafety.hishare.service.implementation.remoting.DeleteParcelImpl"
+		autowire="byName">
+	</bean>
+
+	<bean id="downloadParcelRemoting"
+		class="org.opensafety.hishare.service.implementation.remoting.DownloadParcelImpl"
+		autowire="byName">
+		<constructor-arg>
+			<value>3</value> <!-- Brute Force Breaking Wait Time (in seconds) -->
+		</constructor-arg>
+	</bean>
+
+	<bean id="uploadParcelRemoting"
+		class="org.opensafety.hishare.service.implementation.remoting.UploadParcelImpl"
 		autowire="byName">
 	</bean>
 
 	<!-- Service Exporters -->
 	<bean name="authenticateUserExporter"
 		class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="authenticateUser" />
+		<property name="service" ref="authenticateUserRemoting" />
 		<property name="ServiceInterface"
-			value="org.opensafety.hishare.service.interfaces.AuthenticateUser" />
+			value="org.opensafety.hishare.service.interfaces.remoting.AuthenticateUser" />
 	</bean>
 
 	<bean name="authorizeUserExporter"
 		class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="authorizeUser" />
+		<property name="service" ref="authorizeUserRemoting" />
 		<property name="ServiceInterface"
-			value="org.opensafety.hishare.service.interfaces.AuthorizeUser" />
+			value="org.opensafety.hishare.service.interfaces.remoting.AuthorizeUser" />
 	</bean>
 
 	<bean name="deleteParcelExporter"
 		class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="deleteParcel" />
+		<property name="service" ref="deleteParcelRemoting" />
 		<property name="ServiceInterface"
-			value="org.opensafety.hishare.service.interfaces.DeleteParcel" />
+			value="org.opensafety.hishare.service.interfaces.remoting.DeleteParcel" />
 	</bean>
 
 	<bean name="downloadParcelExporter"
 		class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="downloadParcel" />
+		<property name="service" ref="downloadParcelRemoting" />
 		<property name="ServiceInterface"
-			value="org.opensafety.hishare.service.interfaces.DownloadParcel" />
+			value="org.opensafety.hishare.service.interfaces.remoting.DownloadParcel" />
 	</bean>
 
 	<bean name="uploadParcelExporter"
 		class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="uploadParcel" />
+		<property name="service" ref="uploadParcelRemoting" />
 		<property name="ServiceInterface"
-			value="org.opensafety.hishare.service.interfaces.UploadParcel" />
+			value="org.opensafety.hishare.service.interfaces.remoting.UploadParcel" />
 	</bean>
 	<!-- -->
-	
+
 </beans>

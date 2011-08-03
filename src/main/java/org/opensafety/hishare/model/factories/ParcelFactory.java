@@ -1,12 +1,7 @@
 package org.opensafety.hishare.model.factories;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.Calendar;
 import java.util.UUID;
-
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,9 +16,6 @@ public class ParcelFactory
 	Encryption encryption;
 	
 	private static Log log = LogFactory.getLog(ParcelFactory.class);
-	
-	private static final String RANDOM_GENERATOR = "SHA1PRNG";
-	private static final int SALT_LENGTH = 64;
 	
 	public static String createParcelId()
 	{

@@ -1,16 +1,13 @@
-package org.opensafety.hishare.service.implementation;
+package org.opensafety.hishare.service.implementation.remoting;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.opensafety.hishare.managers.interfaces.ParcelManager;
-import org.opensafety.hishare.managers.interfaces.PayloadManager;
-import org.opensafety.hishare.managers.interfaces.PermissionManager;
-import org.opensafety.hishare.managers.interfaces.UserManager;
+import org.opensafety.hishare.managers.interfaces.remoting.ParcelManager;
+import org.opensafety.hishare.managers.interfaces.remoting.PermissionManager;
+import org.opensafety.hishare.managers.interfaces.remoting.UserManager;
 import org.opensafety.hishare.model.Parcel;
-import org.opensafety.hishare.model.Permission;
-import org.opensafety.hishare.model.PermissionLevel;
 import org.opensafety.hishare.model.User;
-import org.opensafety.hishare.service.interfaces.DownloadParcel;
+import org.opensafety.hishare.service.interfaces.remoting.DownloadParcel;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class DownloadParcelImpl implements DownloadParcel
@@ -24,11 +21,10 @@ public class DownloadParcelImpl implements DownloadParcel
 	
 	Log log = LogFactory.getLog(this.getClass());
 	
-	//genericCredentialsError is intentionally generic so as to avoid giving away information about which credentials succeeded or failed
+	// genericCredentialsError is intentionally generic so as to avoid giving
+	// away information about which credentials succeeded or failed
 	private static final String genericCredentialsError = "The credentials supplied do not permit a download.";
 	private static final String threadInterruptedError = "The thread was interrupted.";
-	private static final String downloadChunkError = "Error downloading";
-	
 	private int crackerBreaker;
 	
 	public DownloadParcelImpl(int crackerBreaker)
@@ -36,17 +32,12 @@ public class DownloadParcelImpl implements DownloadParcel
 		this.crackerBreaker = crackerBreaker;
 	}
 	
-	public Integer getChunkSize()
-	{
-		return parcelManager.getChunkSize();
-	}
-	
 	public String beginParcelDownload(String username, String authenticationId, String parcelId,
 	                                  String parcelPassword)
 	{
 		try
 		{
-			this.wait(crackerBreaker*1000);
+			this.wait(crackerBreaker * 1000);
 		}
 		catch(InterruptedException e)
 		{
@@ -60,7 +51,10 @@ public class DownloadParcelImpl implements DownloadParcel
 				User user = userManager.getByUsername(username);
 				Parcel parcel = parcelManager.getParcel(parcelId, parcelPassword);
 				
-				if(permissionManager.hasDownloadPermission(user,parcel));
+				if(permissionManager.hasDownloadPermission(user, parcel))
+				{
+					;
+				}
 				{
 					String transferKey = parcelManager.beginDownload(parcel);
 					return transferKey;
@@ -71,8 +65,8 @@ public class DownloadParcelImpl implements DownloadParcel
 	}
 	
 	public boolean downloadAvailable(String username, String authenticationId, String parcelId,
-                                     String parcelPassword, String transferKey)
-    {
+	                                 String parcelPassword, String transferKey)
+	{
 		if(userManager.verifyAuthentication(username, authenticationId))
 		{
 			if(parcelManager.verifyParcelAvailable(parcelId, parcelPassword))
@@ -81,7 +75,7 @@ public class DownloadParcelImpl implements DownloadParcel
 			}
 		}
 		return false;
-    }
+	}
 	
 	public byte[] downloadParcelChunk(String username, String authenticationId, String parcelId,
 	                                  String parcelPassword, String transferKey)
@@ -95,35 +89,8 @@ public class DownloadParcelImpl implements DownloadParcel
 		return "ERROR, NOT IMPLEMENTED";
 	}
 	
-	public byte[] downloadParcel(String username, String authenticationId, String parcelId, String parcelPassword)
+	public Integer getChunkSize()
 	{
-		if(userManager.verifyAuthentication(username, authenticationId))
-		{
-			if(parcelManager.verifyParcelAvailable(parcelId, parcelPassword))
-			{
-				User user = userManager.getByUsername(username);
-				Parcel parcel = parcelManager.getParcel(parcelId, parcelPassword);
-				
-				if(permissionManager.hasDownloadPermission(user,parcel))
-				{
-					byte[] payload = parcelManager.downloadPayload(parcel);
-					return payload;
-				}
-				else
-				{
-					log.info("User does not have permission to download");
-				}
-			}
-			else
-			{
-				log.info("Parcel was not verified");
-			}
-		}
-		else
-		{
-			log.info("User was not authenticated");
-		}
-		
-		return genericCredentialsError.getBytes();
+		return parcelManager.getChunkSize();
 	}
 }

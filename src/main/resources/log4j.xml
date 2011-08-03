@@ -1,109 +1,106 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
-<!-- 
-    The default log4j config 
--->
+<!-- The default log4j config -->
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
-    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
-        <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern"
-                value="%d{HH:mm:ss} %p [%t] %c{1}.%M(%L) | %m%n"/>
-        </layout>
-    </appender>
- 
- 	<appender name="FILE" class="org.apache.log4j.RollingFileAppender">
-		<param name="File" value="${catalina.home}/logs/${log4j.application.log}"/>
-		<param name="Append" value="true"/>
-		<param name="MaxFileSize" value="500000KB"/>
-		<param name="MaxBackupIndex" value="50"/> 
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d{HH:mm:ss} %p [%t] %c{1}.%M(%L) | %m%n" />
 		</layout>
-	</appender>  
-    
-    <logger name="net.sf.ehcache">
-        <level value="WARN"/>
-    </logger>
+	</appender>
 
-    <logger name="org.apache">
-        <level value="WARN"/>
-    </logger>
+	<appender name="FILE" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="${catalina.home}/logs/${log4j.application.log}" />
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="500000KB" />
+		<param name="MaxBackupIndex" value="50" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{HH:mm:ss} %p [%t] %c{1}.%M(%L) | %m%n" />
+		</layout>
+	</appender>
 
-    <logger name="org.apache.velocity">
-        <level value="FATAL"/>
-    </logger>
+	<logger name="net.sf.ehcache">
+		<level value="WARN" />
+	</logger>
 
-    <logger name="org.tuckey">
-        <level value="FATAL"/>
-    </logger>
-    <!-- Workaround https://issues.jasig.org/browse/CASC-105 -->
-    <logger name="org.jasig.cas.client.util.CommonUtils">
-        <level value="ERROR"/>
-    </logger>
-    
-    <!-- Suppress invalid warning messages from JSF -->
-    <logger name="org.apache.myfaces.shared_impl.renderkit.html">
-        <level value="ERROR"/>
-    </logger>
+	<logger name="org.apache">
+		<level value="WARN" />
+	</logger>
 
-    <logger name="org.hibernate">
-        <level value="WARN"/>
-    </logger>  
-    <logger name="org.hibernate.SQL">
-        <level value="WARN"/>
-    </logger>
-    <logger name="org.hibernate.jdbc">
-        <level value="WARN"/>        
-    </logger>        
-    
+	<logger name="org.apache.velocity">
+		<level value="FATAL" />
+	</logger>
 
-    <logger name="org.hibernate.criterion">
-        <level value="ERROR"/>
-    </logger>
+	<logger name="org.tuckey">
+		<level value="FATAL" />
+	</logger>
+	<!-- Workaround https://issues.jasig.org/browse/CASC-105 -->
+	<logger name="org.jasig.cas.client.util.CommonUtils">
+		<level value="ERROR" />
+	</logger>
 
-    <logger name="org.springframework">
-        <level value="ERROR"/>
-    </logger>
-    
-    <logger name="org.springframework.beans.factory.support">
-        <level value="WARN"/>
-    </logger>
-    
-    <logger name="org.springframework.jmx">
-        <level value="WARN"/>
-    </logger>            
+	<!-- Suppress invalid warning messages from JSF -->
+	<logger name="org.apache.myfaces.shared_impl.renderkit.html">
+		<level value="ERROR" />
+	</logger>
 
-    <logger name="org.springframework.security">
-        <level value="WARN"/>
-    </logger>
-   
-    <logger name="org.springframework.security.acls">
-        <level value="WARN"/>
-    </logger>
-    
-    <logger name="org.springframework.security.cas">
-        <level value="WARN"/>
-    </logger>
-            
-    <logger name="org.jasig">
-        <level value="WARN"/>
-    </logger>        
-   
-    <logger name="org.opensafety">
-        <level value="DEBUG"/>
-    </logger>
+	<logger name="org.hibernate">
+		<level value="WARN" />
+	</logger>
+	<logger name="org.hibernate.SQL">
+		<level value="WARN" />
+	</logger>
+	<logger name="org.hibernate.jdbc">
+		<level value="WARN" />
+	</logger>
 
-    <!-- The logger used to render error message presented to the user -->
-    <logger name="Error.jsp">
-        <level value="DEBUG"/>
-    </logger>    
 
-    <root>
-        <level value="WARN"/>
+	<logger name="org.hibernate.criterion">
+		<level value="ERROR" />
+	</logger>
 
-        <appender-ref ref="FILE"/>
-        <appender-ref ref="EMAIL" />        
-    </root>
+	<logger name="org.springframework">
+		<level value="ERROR" />
+	</logger>
+
+	<logger name="org.springframework.beans.factory.support">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="org.springframework.jmx">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="org.springframework.security">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="org.springframework.security.acls">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="org.springframework.security.cas">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="org.jasig">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="org.opensafety">
+		<level value="DEBUG" />
+	</logger>
+
+	<!-- The logger used to render error message presented to the user -->
+	<logger name="Error.jsp">
+		<level value="DEBUG" />
+	</logger>
+
+	<root>
+		<level value="WARN" />
+
+		<appender-ref ref="FILE" />
+		<appender-ref ref="EMAIL" />
+	</root>
 
 </log4j:configuration>
