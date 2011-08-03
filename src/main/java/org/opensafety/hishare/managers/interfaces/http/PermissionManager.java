@@ -8,6 +8,8 @@ public interface PermissionManager
 {
 	boolean deletePermissions(Parcel parcel);
 	
+	boolean hasAuthorizePermission(User authorizer, Parcel parcel);
+	
 	boolean hasDeletePermission(User user, Parcel parcel);
 	
 	boolean hasDownloadPermission(User user, Parcel parcel);

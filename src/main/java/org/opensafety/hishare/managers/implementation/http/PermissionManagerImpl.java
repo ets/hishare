@@ -17,6 +17,8 @@ public class PermissionManagerImpl implements PermissionManager
 	
 	private Log log = LogFactory.getLog(this.getClass());
 	
+	private PermissionLevel[] authorizePermissions = { PermissionLevel.OWNER };
+	
 	private PermissionLevel[] downloadPermissions = { PermissionLevel.OWNER,
 	                                                 PermissionLevel.RECEIVER };
 	
@@ -25,6 +27,11 @@ public class PermissionManagerImpl implements PermissionManager
 	public boolean deletePermissions(Parcel parcel)
 	{
 		return permissionDao.deleteAllWithParcel(parcel);
+	}
+	
+	public boolean hasAuthorizePermission(User user, Parcel parcel)
+	{
+		return permissionDao.hasEither(user, parcel, authorizePermissions);
 	}
 	
 	public boolean hasDeletePermission(User user, Parcel parcel)

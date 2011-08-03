@@ -37,19 +37,24 @@ public class AuthorizeUserImpl implements AuthorizeUser
 		{
 			if(parcelManager.verifyParcelAvailable(parcelId, parcelPassword))
 			{
-				if(!userManager.userExists(userToAuthorize))
-				{
-					userManager.persistUser(userFactory.createUser(userToAuthorize));
-				}
-				
-				User toBeAuthorized = userManager.getByUsername(userToAuthorize);
+				User authorizer = userManager.getByUsername(authorizingUser);
 				Parcel parcel = parcelManager.getParcel(parcelId, parcelPassword);
 				
-				Permission permission = permissionFactory.createPermission(parcel, toBeAuthorized,
-				                                                           permissionLevel);
-				permissionManager.persistPermission(permission);
-				
-				return permissionAddedSuccessfully;
+				if(permissionManager.hasAuthorizePermission(authorizer, parcel))
+				{
+					if(!userManager.userExists(userToAuthorize))
+					{
+						userManager.persistUser(userFactory.createUser(userToAuthorize));
+					}
+					
+					User toBeAuthorized = userManager.getByUsername(userToAuthorize);
+					
+					Permission permission = permissionFactory.createPermission(parcel, toBeAuthorized,
+					                                                           permissionLevel);
+					permissionManager.persistPermission(permission);
+					
+					return permissionAddedSuccessfully;
+				}
 			}
 		}
 		return genericCredentialsError;
