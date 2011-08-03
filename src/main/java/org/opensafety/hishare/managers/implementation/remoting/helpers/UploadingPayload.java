@@ -1,4 +1,4 @@
-package org.opensafety.hishare.managers.implementation.helpers;
+package org.opensafety.hishare.managers.implementation.remoting.helpers;
 
 import java.io.ByteArrayOutputStream;
 

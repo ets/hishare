@@ -19,9 +19,9 @@
 	<bean id="encryption"
 		class="org.opensafety.hishare.util.implementation.EncryptionImpl"
 		autowire="byName">
-		<constructor-arg value='255' />  <!-- Salt Length -->
+		<constructor-arg value='255' />  <!-- Salt Length (Bytes)-->
 		<constructor-arg value='1000' />  <!-- PBE Iteration Count -->
-		<constructor-arg value='255' /> <!-- Password Length -->
+		<constructor-arg value='255' /> <!-- Password Length () -->
 		<constructor-arg value='512' /> <!-- PBE Key Length -->
 		<constructor-arg value='SHA1PRNG' />  <!-- Random Algorithm -->
 		<constructor-arg value='PBEWITHSHA256AND128BITAES-CBC-BC' />  <!-- PBE Algorithm -->
