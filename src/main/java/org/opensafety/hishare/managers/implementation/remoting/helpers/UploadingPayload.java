@@ -20,7 +20,6 @@ public class UploadingPayload
 	{
 		// accumulate payload
 		payload.write(chunk, 0, chunk.length);
-		log.info("Payload: '" + new String(payload.toByteArray()) + "'");
 	}
 	
 	public byte[] getPayload()

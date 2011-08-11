@@ -37,9 +37,10 @@ public class AuthorizeUserImpl implements AuthorizeUser
 		{
 			if(parcelManager.verifyParcelAvailable(parcelId, parcelPassword))
 			{
+				User authorizer = userManager.getByUsername(authorizingUser);
 				if(!userManager.userExists(userToAuthorize))
 				{
-					userManager.persistUser(userFactory.createUser(userToAuthorize));
+					userManager.persistUser(userFactory.createUser(userToAuthorize, authorizer.getAuthorizingServerName()));
 				}
 				
 				User toBeAuthorized = userManager.getByUsername(userToAuthorize);

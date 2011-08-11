@@ -24,14 +24,16 @@ public class AuthorizeUserController
 	                                     @RequestParam("userToAuthorize") String userToAuthorize,
 	                                     @RequestParam("permissionLevel") Integer permissionLevel)
 	{
-		ModelAndView mav = new ModelAndView("AuthorizeUser");
+		ModelAndView mav;
+		
+		mav = new ModelAndView("outputString");
 		
 		PermissionLevel permission = PermissionLevel.values()[permissionLevel];
 		
-		String result = authorizeUser.authorize(authorizingUser, authenticationId, parcelId,
-		                                        parcelPassword, userToAuthorize, permission);
+		String result = authorizeUser.authorizeUser(authorizingUser, authenticationId, parcelId,
+		                                            parcelPassword, userToAuthorize, permission);
 		
-		mav.addObject("result", result);
+		mav.addObject("string", result);
 		
 		return mav;
 	}

@@ -11,6 +11,7 @@ import org.opensafety.hishare.managers.interfaces.remoting.ParcelManager;
 import org.opensafety.hishare.managers.interfaces.remoting.PayloadManager;
 import org.opensafety.hishare.model.Parcel;
 import org.opensafety.hishare.util.interfaces.Encryption;
+import org.opensafety.hishare.util.interfaces.Encryption.CryptographyException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ParcelManagerImpl implements ParcelManager
@@ -86,9 +87,10 @@ public class ParcelManagerImpl implements ParcelManager
 					return null;
 				}
 			}
-			catch(Exception e)
+			catch(CryptographyException e)
 			{
 				log.error("Password Matching Threw Exception!");
+				e.printStackTrace();
 				return null;
 			}
 		}
@@ -127,21 +129,15 @@ public class ParcelManagerImpl implements ParcelManager
 			try
 			{
 				byte[] hashedPassword = encryption.hashPassword(parcelPassword, parcel.getSalt());
-				log.info("VERIFYING PARCEL");
-				log.info("Parcel Password: " + parcelPassword);
-				log.info("Salt: " + parcel.getSalt());
-				log.info("Expected Hash: " + new String(parcel.getHashedPassword()));
-				log.info("  Actual Hash: " + new String(hashedPassword));
-				
 				return Arrays.equals(hashedPassword, parcel.getHashedPassword());
 			}
-			catch(Exception e)
+			catch(CryptographyException e)
 			{
 				log.error("Password Matching Threw Exception!");
+				e.printStackTrace();
 				return false;
 			}
 		}
-		log.info("Parcel not available");
 		return false;
 	}
 }

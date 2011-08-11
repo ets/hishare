@@ -12,22 +12,10 @@ public class AuthenticateUserImpl implements AuthenticateUser
 	private UserManager userManager;
 	@Autowired
 	private UserFactory userFactory;
-	
-	public AuthenticateUserImpl()
-	{
-	}
-	
+
 	public String justAuthenticateMe(String username)
-	{
-		if(!userManager.userExists(username))
-		{
-			User newUser = userFactory.createUser(username);
-			userManager.persistUser(newUser);
-		}
-		
-		String authId = userManager.renewUserAuthentication(username);
-		
-		return authId;
-	}
-	
+    {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
 }

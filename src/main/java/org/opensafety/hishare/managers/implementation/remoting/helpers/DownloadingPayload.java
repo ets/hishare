@@ -26,6 +26,5 @@ public class DownloadingPayload
 	{
 		// accumulate payload
 		payload.read(chunk);
-		log.info("Payload: '" + new String(chunk) + "'");
 	}
 }

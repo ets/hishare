@@ -24,4 +24,6 @@ public interface Encryption
 	public byte[] encryptPayload(Parcel parcel, byte[] payload) throws CryptographyException;
 	
 	public byte[] hashPassword(String password, byte[] salt) throws CryptographyException;
+	
+	public Long hash(String plainText) throws CryptographyException;
 }

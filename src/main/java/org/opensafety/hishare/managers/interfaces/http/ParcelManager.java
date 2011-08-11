@@ -15,4 +15,6 @@ public interface ParcelManager
 	public void updateParcel(Parcel parcel);
 	
 	public boolean verifyParcelAvailable(String parcelId, String parcelPassword);
+
+	public boolean verifyDaysToLive(int daysToLive);
 }

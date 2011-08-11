@@ -21,7 +21,6 @@ public class HibernatePermissionDao extends HibernateDaoSupport implements Permi
 	
 	public void addPermission(Permission permission)
 	{
-		log.info("Saving Permission");
 		getSession().save(permission);
 	}
 	
@@ -42,15 +41,16 @@ public class HibernatePermissionDao extends HibernateDaoSupport implements Permi
 	{
 		return getSession().createCriteria(Permission.class)
 		                   .add(Restrictions.in("permission", permissions))
-		                   .createAlias("user", "u").createAlias("parcel", "p")
+		                   .createAlias("user", "u")
+		                   .createAlias("parcel", "p")
 		                   .add(Restrictions.eq("u.id", user.getId()))
-		                   .add(Restrictions.eq("p.id", parcel.getId())).setMaxResults(1)
+		                   .add(Restrictions.eq("p.id", parcel.getId()))
+		                   .setMaxResults(1)
 		                   .uniqueResult() != null;
 	}
 	
 	public void updatePermission(Permission permission)
 	{
-		log.info("Updating Permission");
 		getSession().merge(permission);
 	}
 }

@@ -20,12 +20,18 @@ public class AuthenticateUserController
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView authenticateUser(@RequestParam("username") String username)
+	public
+	        ModelAndView
+	        authenticateUser(@RequestParam("username") String username,
+	                         @RequestParam("authenticationServerName") String authenticationServerName,
+	                         @RequestParam("authenticationServerPassword") String authenticationServerPassword)
 	{
-		String authId = authenticateUser.justAuthenticateMe(username);
+		ModelAndView mav = new ModelAndView("outputString");
 		
-		ModelAndView mav = new ModelAndView("AuthenticateUser");
-		mav.addObject("AuthenticationId", authId);
+		String authId = authenticateUser.authenticate(username, authenticationServerName,
+		                                              authenticationServerPassword);
+		
+		mav.addObject("string", authId);
 		return mav;
 	}
 }

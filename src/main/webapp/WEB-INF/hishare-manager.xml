@@ -19,6 +19,9 @@
 	<bean id="parcelManager"
 		class="org.opensafety.hishare.managers.implementation.http.ParcelManagerImpl"
 		autowire="byName">
+		<constructor-arg>
+			<value>3</value> <!-- Maximum Time till Parcel Expires (days) -->
+		</constructor-arg>
 	</bean>
 
 	<bean id="payloadManager"
@@ -33,6 +36,14 @@
 
 	<bean id="userManager"
 		class="org.opensafety.hishare.managers.implementation.http.UserManagerImpl"
+		autowire="byName">
+		<constructor-arg>
+			<value>24</value> <!-- Time till Authentication Expires (hours) -->
+		</constructor-arg>
+	</bean>
+
+	<bean id="authenticationServerManager"
+		class="org.opensafety.hishare.managers.implementation.http.AuthenticationServerManagerImpl"
 		autowire="byName">
 	</bean>
 

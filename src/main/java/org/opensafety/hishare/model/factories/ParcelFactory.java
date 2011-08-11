@@ -15,14 +15,14 @@ public class ParcelFactory
 	@Autowired
 	Encryption encryption;
 	
-	private static Log log = LogFactory.getLog(ParcelFactory.class);
+	private Log log = LogFactory.getLog(ParcelFactory.class);
 	
-	public static String createParcelId()
+	private String createParcelId()
 	{
 		return UUID.randomUUID().toString();
 	}
 	
-	public static String createPayloadLocation()
+	private String createPayloadLocation()
 	{
 		return UUID.randomUUID().toString();
 	}
@@ -43,7 +43,7 @@ public class ParcelFactory
 		}
 		catch(CryptographyException e)
 		{
-			log.error("Error: Parcel Creation Failed");
+			log.error("Parcel Creation Failed");
 			e.printStackTrace();
 		}
 		return newParcel;

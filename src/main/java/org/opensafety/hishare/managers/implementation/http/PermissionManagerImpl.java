@@ -46,8 +46,6 @@ public class PermissionManagerImpl implements PermissionManager
 	
 	public void persistPermission(Permission permission)
 	{
-		log.info("Persisting Permission");
-		
 		if(!permissionDao.hasEither(permission.getUser(), permission.getParcel(),
 		                            new PermissionLevel[] { permission.getPermission() }))
 		{

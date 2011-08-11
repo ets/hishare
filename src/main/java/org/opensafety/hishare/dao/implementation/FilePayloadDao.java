@@ -40,8 +40,6 @@ public class FilePayloadDao implements PayloadDao
 	
 	public byte[] retrievePayload(Parcel parcel)
 	{
-		log.info("RETRIEVING PAYLOAD: " + parcel.getPayloadLocation());
-		
 		String specificLocation = specifyLocation(parcel.getPayloadLocation());
 		
 		FileInputStream fileIn = null;
@@ -57,23 +55,27 @@ public class FilePayloadDao implements PayloadDao
 		}
 		catch(FileNotFoundException e)
 		{
+			log.error("Encrypted file could not be found");
 			e.printStackTrace();
 			return null;
 		}
 		catch(IOException e)
 		{
+			log.error("Could not read encrypted file");
 			e.printStackTrace();
 			return null;
 		}
 		
-		byte[] payload = null;
+		byte[] payload;
 		try
 		{
 			payload = encryption.decryptPayload(parcel, encryptedPayload);
 		}
 		catch(CryptographyException e)
 		{
+			log.error("Payload could not be decrypted");
 			e.printStackTrace();
+			return null;
 		}
 		
 		return payload;
@@ -81,16 +83,14 @@ public class FilePayloadDao implements PayloadDao
 	
 	public boolean savePayload(Parcel parcel, byte[] payload)
 	{
-		log.info("SAVING PAYLOAD: " + new String(payload) + " AT LOCATION: "
-		        + parcel.getPayloadLocation());
-		
 		byte[] encryptedPayload;
 		try
 		{
 			encryptedPayload = encryption.encryptPayload(parcel, payload);
 		}
-		catch(Exception e)
+		catch(CryptographyException e)
 		{
+			log.error("Payload could not be encrypted");
 			e.printStackTrace();
 			return false;
 		}
@@ -104,8 +104,9 @@ public class FilePayloadDao implements PayloadDao
 			fileOut.write(encryptedPayload);
 			fileOut.close();
 		}
-		catch(Exception e)
+		catch(IOException e)
 		{
+			log.error("Could not write encrypted payload to file");
 			e.printStackTrace();
 			return false;
 		}

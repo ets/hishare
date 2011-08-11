@@ -21,14 +21,14 @@
 		autowire="byName">
 		<constructor-arg value='255' />  <!-- Salt Length (Bytes)-->
 		<constructor-arg value='1000' />  <!-- PBE Iteration Count -->
-		<constructor-arg value='255' /> <!-- Password Length () -->
+		<constructor-arg value='512' /> <!-- Password Length (Bits) -->
 		<constructor-arg value='512' /> <!-- PBE Key Length -->
 		<constructor-arg value='SHA1PRNG' />  <!-- Random Algorithm -->
 		<constructor-arg value='PBEWITHSHA256AND128BITAES-CBC-BC' />  <!-- PBE Algorithm -->
 		<constructor-arg value='AES/CBC/PKCS5Padding' />  <!-- Cipher Algorithm -->
 		<constructor-arg value='AES' /> <!-- Key Generator -->
 		<constructor-arg value='AES' /> <!-- KeySpec Algorithm -->
-		<constructor-arg value='SHA-512' /> <!-- Hash Algorithm -->
+		<constructor-arg value='SHA-512' /> <!-- Password Hash Algorithm -->
 	</bean>
 
 </beans>

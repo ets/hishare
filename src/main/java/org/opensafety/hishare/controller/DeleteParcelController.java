@@ -21,10 +21,12 @@ public class DeleteParcelController
 	                                     @RequestParam("parcelId") String parcelId,
 	                                     @RequestParam("parcelPassword") String parcelPassword)
 	{
-		ModelAndView mav = new ModelAndView("DeleteParcel");
+		ModelAndView mav;
+		
+		mav = new ModelAndView("outputString");
 		String result = deleteParcel.deleteParcel(username, authenticationId, parcelId,
 		                                          parcelPassword);
-		mav.addObject("result", result);
+		mav.addObject("string", result);
 		
 		return mav;
 	}

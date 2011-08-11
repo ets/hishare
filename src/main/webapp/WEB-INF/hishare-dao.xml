@@ -41,11 +41,12 @@
 				<value>org.opensafety.hishare.model.Parcel</value>
 				<value>org.opensafety.hishare.model.User</value>
 				<value>org.opensafety.hishare.model.Permission</value>
+				<value>org.opensafety.hishare.model.AuthenticationServer</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 			</props>
@@ -80,6 +81,12 @@
 
 	<bean id="userDao"
 		class="org.opensafety.hishare.dao.implementation.HibernateUserDao"
+		autowire="byName">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="authenticationServerDao"
+		class="org.opensafety.hishare.dao.implementation.HibernateAuthenticationServerDao"
 		autowire="byName">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>

@@ -9,7 +9,7 @@ import org.opensafety.hishare.model.User;
 
 public class PermissionFactory
 {
-	public static Long createPermissionId()
+	private Long createPermissionId()
 	{
 		return UUID.randomUUID().getLeastSignificantBits();
 	}

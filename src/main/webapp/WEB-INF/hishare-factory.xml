@@ -29,4 +29,9 @@
 		autowire="byName">
 	</bean>
 
+	<bean id="authenticationServerFactory"
+		class="org.opensafety.hishare.model.factories.AuthenticationServerFactory"
+		autowire="byName">
+	</bean>
+
 </beans>

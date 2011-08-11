@@ -1,6 +1,8 @@
 package org.opensafety.hishare.managers.implementation.http;
 
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -9,6 +11,7 @@ import org.opensafety.hishare.managers.interfaces.http.ParcelManager;
 import org.opensafety.hishare.managers.interfaces.http.PayloadManager;
 import org.opensafety.hishare.model.Parcel;
 import org.opensafety.hishare.util.interfaces.Encryption;
+import org.opensafety.hishare.util.interfaces.Encryption.CryptographyException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ParcelManagerImpl implements ParcelManager
@@ -20,11 +23,27 @@ public class ParcelManagerImpl implements ParcelManager
 	@Autowired
 	private Encryption encryption;
 	
+	private int maximumParcelExpiration;
+	
 	Log log = LogFactory.getLog(this.getClass());
 	
 	public ParcelManagerImpl()
 	{
+		this(1);
 	}
+	
+	public ParcelManagerImpl(int parcelExpiration)
+	{
+		this.maximumParcelExpiration = parcelExpiration;
+	}
+	
+	private boolean notExpired(Parcel parcel)
+    {
+		Date expiration = parcel.getExpirationDate();
+		Date now = Calendar.getInstance().getTime();
+		
+		return now.before(expiration);
+    }
 	
 	public boolean deleteParcel(Parcel parcel)
 	{
@@ -35,9 +54,17 @@ public class ParcelManagerImpl implements ParcelManager
 	
 	public byte[] downloadPayload(Parcel parcel)
 	{
-		return payloadManager.downloadPayload(parcel);
+		//seriously, you can't download after expiration
+		if(notExpired(parcel))
+		{
+			return payloadManager.downloadPayload(parcel);
+		}
+		else
+		{
+			return null;
+		}
 	}
-	
+
 	public Parcel getParcel(String parcelId, String parcelPassword)
 	{
 		if(parcelDao.verifyParcelAvailable(parcelId))
@@ -56,9 +83,10 @@ public class ParcelManagerImpl implements ParcelManager
 					return null;
 				}
 			}
-			catch(Exception e)
+			catch(CryptographyException e)
 			{
 				log.error("Password Matching Threw Exception!");
+				e.printStackTrace();
 				return null;
 			}
 		}
@@ -84,24 +112,26 @@ public class ParcelManagerImpl implements ParcelManager
 		if(parcelDao.verifyParcelAvailable(parcelId))
 		{
 			Parcel parcel = parcelDao.getById(parcelId);
-			try
+			if(notExpired(parcel))
 			{
-				byte[] hashedPassword = encryption.hashPassword(parcelPassword, parcel.getSalt());
-				log.info("VERIFYING PARCEL");
-				log.info("Parcel Password: " + parcelPassword);
-				log.info("Salt: " + parcel.getSalt());
-				log.info("Expected Hash: " + new String(parcel.getHashedPassword()));
-				log.info("  Actual Hash: " + new String(hashedPassword));
-				
-				return Arrays.equals(hashedPassword, parcel.getHashedPassword());
-			}
-			catch(Exception e)
-			{
-				log.error("Password Matching Threw Exception!");
-				return false;
+				try
+				{
+					byte[] hashedPassword = encryption.hashPassword(parcelPassword, parcel.getSalt());
+					return Arrays.equals(hashedPassword, parcel.getHashedPassword());
+				}
+				catch(CryptographyException e)
+				{
+					log.error("Password Matching Threw Exception!");
+					e.printStackTrace();
+					return false;
+				}
 			}
 		}
-		log.info("Parcel not available");
 		return false;
 	}
+
+	public boolean verifyDaysToLive(int daysToLive)
+    {
+		return daysToLive <= maximumParcelExpiration;
+    }
 }

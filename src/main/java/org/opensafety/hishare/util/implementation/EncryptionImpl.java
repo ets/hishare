@@ -1,5 +1,6 @@
 package org.opensafety.hishare.util.implementation;
 
+import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -31,7 +32,7 @@ public class EncryptionImpl implements Encryption
 	private String pbeAlgorithm;
 	private String cipherAlgorithm;
 	private String keyGenerator;
-	private String hashAlgorithm;
+	private String passwordHashAlgorithm;
 	
 	public EncryptionImpl()
 	{
@@ -41,7 +42,7 @@ public class EncryptionImpl implements Encryption
 	
 	public EncryptionImpl(int saltLength, int pbeIterationCount, int passwordLength,
 	        int pbeKeyLength, String randomAlgorithm, String pbeAlgorithm, String cipherAlgorithm,
-	        String keyGenerator, String keySpecAlgorithm, String hashAlgorithm)
+	        String keyGenerator, String keySpecAlgorithm, String passwordHashAlgorihtm)
 	{
 		Security.addProvider(new BouncyCastleProvider());
 		
@@ -54,7 +55,7 @@ public class EncryptionImpl implements Encryption
 		this.pbeAlgorithm = pbeAlgorithm;
 		this.cipherAlgorithm = cipherAlgorithm;
 		this.keyGenerator = keyGenerator;
-		this.hashAlgorithm = hashAlgorithm;
+		this.passwordHashAlgorithm = passwordHashAlgorihtm;
 	}
 	
 	public String createPassword() throws CryptographyException
@@ -196,7 +197,7 @@ public class EncryptionImpl implements Encryption
 	{
 		try
 		{
-			MessageDigest md = MessageDigest.getInstance(hashAlgorithm);
+			MessageDigest md = MessageDigest.getInstance(passwordHashAlgorithm);
 			md.reset();
 			md.update(salt);
 			return md.digest(password.getBytes());
@@ -206,4 +207,19 @@ public class EncryptionImpl implements Encryption
 			throw new CryptographyException(e.getMessage());
 		}
 	}
+
+	public Long hash(String plainText) throws CryptographyException
+    {
+		try
+		{
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			byte[] cipher = md.digest(plainText.getBytes());
+			ByteBuffer converter = ByteBuffer.wrap(cipher);
+			return converter.getLong();
+		}
+		catch(Exception e)
+		{
+			throw new CryptographyException(e.getMessage());
+		}
+    }
 }

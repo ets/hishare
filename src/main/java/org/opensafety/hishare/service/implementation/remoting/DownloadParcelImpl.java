@@ -41,6 +41,7 @@ public class DownloadParcelImpl implements DownloadParcel
 		}
 		catch(InterruptedException e)
 		{
+			log.error("Brute-Force-Breaking wait was interrupted");
 			return threadInterruptedError;
 		}
 		

@@ -1,5 +1,9 @@
 package org.opensafety.hishare.service.implementation.http;
 
+import java.util.Date;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.opensafety.hishare.managers.interfaces.http.ParcelManager;
 import org.opensafety.hishare.managers.interfaces.http.PermissionManager;
 import org.opensafety.hishare.managers.interfaces.http.UserManager;
@@ -26,13 +30,21 @@ public class AuthorizeUserImpl implements AuthorizeUser
 	@Autowired
 	private UserFactory userFactory;
 	
+	Log log = LogFactory.getLog(this.getClass());
+	
 	private static final String genericCredentialsError = "The credentials supplied do not permit you to alter permissions.";
 	private static final String permissionAddedSuccessfully = "Permission added successfully";
 	
-	public String authorize(String authorizingUser, String authenticationId, String parcelId,
+	public String authorizeUser(String authorizingUser, String authenticationId, String parcelId,
 	                        String parcelPassword, String userToAuthorize,
 	                        PermissionLevel permissionLevel)
 	{
+		log.info((new Date())+" Authorize User ");
+		log.debug("authorizer: "+authorizingUser);
+		log.debug("parcel Id: "+parcelId);
+		log.debug("authorizee: "+userToAuthorize);
+		log.debug("Permission Level: "+permissionLevel.toString());
+		
 		if(userManager.verifyAuthentication(authorizingUser, authenticationId))
 		{
 			if(parcelManager.verifyParcelAvailable(parcelId, parcelPassword))
@@ -44,7 +56,7 @@ public class AuthorizeUserImpl implements AuthorizeUser
 				{
 					if(!userManager.userExists(userToAuthorize))
 					{
-						userManager.persistUser(userFactory.createUser(userToAuthorize));
+						userManager.persistUser(userFactory.createUser(userToAuthorize, authorizer.getAuthorizingServerName()));
 					}
 					
 					User toBeAuthorized = userManager.getByUsername(userToAuthorize);
@@ -53,9 +65,22 @@ public class AuthorizeUserImpl implements AuthorizeUser
 					                                                           permissionLevel);
 					permissionManager.persistPermission(permission);
 					
+					log.info((new Date())+" Authorization Successfull ");
 					return permissionAddedSuccessfully;
 				}
+				else
+				{
+					log.info((new Date())+" Authorization Unsuccessfull: No Permissions for Authorization ");
+				}
 			}
+			else
+			{
+				log.info((new Date())+" Authorization Unsuccessfull: Parcel Not Available ");
+			}
+		}
+		else
+		{
+			log.info((new Date())+" Authorization Unsuccessfull: User Not Verified ");
 		}
 		return genericCredentialsError;
 	}

@@ -15,15 +15,11 @@
      http://www.springframework.org/schema/aop 
      http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
-	<!-- View Beans -->
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix">
-			<value>/WEB-INF/jsp/</value>
-		</property>
-		<property name="suffix">
-			<value>.jsp</value>
-		</property>
-	</bean>
+	<!-- View Beans <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
+		<property name="prefix"> <value>/WEB-INF/jsp/</value> </property> <property 
+		name="suffix"> <value>.jsp</value> </property> </bean> -->
+
+	<bean name="outputBytes" class="org.opensafety.hishare.view.ByteOutput" />
+	<bean name="outputString" class="org.opensafety.hishare.view.StringOutput" />
 
 </beans>

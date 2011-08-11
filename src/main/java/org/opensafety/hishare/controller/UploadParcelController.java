@@ -1,7 +1,10 @@
 package org.opensafety.hishare.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.opensafety.hishare.service.interfaces.http.UploadParcel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import sun.tools.tree.ThisExpression;
+
 @Controller
 @RequestMapping("/UploadParcel")
 public class UploadParcelController
@@ -18,7 +23,9 @@ public class UploadParcelController
 	@Autowired
 	UploadParcel uploadParcel;
 	
-	@RequestMapping(method = RequestMethod.POST)
+	Log log = LogFactory.getLog(this.getClass());
+	
+	@RequestMapping(value="/file", method = RequestMethod.POST)
 	public ModelAndView
 	        handleFormUpload(@RequestParam("username") String username,
 	                         @RequestParam("authenticationId") String authenticationId,
@@ -26,6 +33,8 @@ public class UploadParcelController
 	                         @RequestParam("daysToLive") Integer daysToLive,
 	                         @RequestParam("file") MultipartFile file) throws IOException
 	{
+		ModelAndView mav;
+		
 		byte[] payload = null;
 		
 		if(!file.isEmpty())
@@ -33,11 +42,30 @@ public class UploadParcelController
 			payload = file.getBytes();
 		}
 		
-		ModelAndView mav = new ModelAndView("UploadParcel");
+		mav = new ModelAndView("outputString");
 		String[] accessInfo = uploadParcel.uploadParcel(username, authenticationId, parcelName,
 		                                                daysToLive, payload);
-		mav.addObject("parcelId", accessInfo[0]);
-		mav.addObject("parcelPassword", accessInfo[1]);
+		String output = accessInfo[0]+":"+accessInfo[1];
+		mav.addObject("string", output);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/raw", method = RequestMethod.POST)
+	public ModelAndView
+	        handleFormUpload(@RequestParam("username") String username,
+	                         @RequestParam("authenticationId") String authenticationId,
+	                         @RequestParam("parcelName") String parcelName,
+	                         @RequestParam("daysToLive") Integer daysToLive,
+	                         @RequestParam("data") String payload) throws IOException
+	{
+		ModelAndView mav;
+		
+		mav = new ModelAndView("outputString");
+		String[] accessInfo = uploadParcel.uploadParcel(username, authenticationId, parcelName,
+		                                                daysToLive, payload.getBytes());
+		String output = accessInfo[0]+":"+accessInfo[1];
+		mav.addObject("string", output);
 		
 		return mav;
 	}

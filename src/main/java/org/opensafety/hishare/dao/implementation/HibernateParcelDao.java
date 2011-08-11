@@ -17,10 +17,6 @@ public class HibernateParcelDao extends HibernateDaoSupport implements ParcelDao
 	
 	public void addParcel(Parcel parcel)
 	{
-		log.info("ADDING PARCEL");
-		log.info("Password: " + parcel.getPassword());
-		log.info("Salt: " + parcel.getSalt());
-		log.info("Hashed Password: " + parcel.getHashedPassword());
 		getSessionFactory().getCurrentSession().save(parcel);
 	}
 	

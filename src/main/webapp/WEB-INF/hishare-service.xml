@@ -44,6 +44,16 @@
 		autowire="byName">
 	</bean>
 
+	<bean id="changeAuthenticationServerPassword"
+		class="org.opensafety.hishare.service.implementation.http.ChangeAuthenticationServerPasswordImpl"
+		autowire="byName">
+	</bean>
+
+	<bean id="addAuthenticationServer"
+		class="org.opensafety.hishare.service.implementation.http.AddAuthenticationServerImpl"
+		autowire="byName">
+	</bean>
+
 	<!-- Remoting Service Beans -->
 	<bean id="authenticateUserRemoting"
 		class="org.opensafety.hishare.service.implementation.remoting.AuthenticateUserImpl"

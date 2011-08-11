@@ -21,10 +21,12 @@ public class DownloadParcelController
 	                                     @RequestParam("parcelId") String parcelId,
 	                                     @RequestParam("parcelPassword") String parcelPassword)
 	{
-		ModelAndView mav = new ModelAndView("DownloadParcel");
+		ModelAndView mav;
+		
+		mav = new ModelAndView("outputBytes");
 		byte[] payload = downloadParcel.downloadParcel(username, authenticationId, parcelId,
 		                                               parcelPassword);
-		mav.addObject("payload", new String(payload));
+		mav.addObject("bytes", payload);
 		
 		return mav;
 	}
