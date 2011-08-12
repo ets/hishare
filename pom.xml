@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   Copyright 2011 Pascal Metrics
   
@@ -38,13 +39,22 @@
 
 	<build>
 		<finalName>HiShare</finalName>
-
+        <resources>
+	      <resource>
+	        <filtering>true</filtering>
+	        <directory>src/main/resources</directory>
+	        <excludes>
+	          <exclude>**/*.vm</exclude>                                   
+	        </excludes>
+	      </resource>        
+        </resources>
 		<plugins>
 
 			<!-- Jetty Plugin -->
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.25</version>
 				<configuration>
 					<contextPath>/</contextPath>
 					<scanIntervalSeconds>5</scanIntervalSeconds>
@@ -237,11 +247,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
@@ -331,6 +336,7 @@
 	<properties>
 		<hibernate-annotations.version>3.4.0.GA</hibernate-annotations.version>
 		<hibernate-core.version>3.3.2.GA</hibernate-core.version>
+		<hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate.dialect>
 		<hsqldb.version>1.8.0.10</hsqldb.version>
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<spring-security.version>3.0.5.RELEASE</spring-security.version>
@@ -348,6 +354,10 @@
 		<jdbc.groupId>mysql</jdbc.groupId>
 		<maven.test.skip>false</maven.test.skip>
 		<javax.servlet.version>2.5</javax.servlet.version>
-		<bouncycastle.version>138</bouncycastle.version>
+		<bouncycastle.version>138</bouncycastle.version>		
+		<jdbc.url>jdbc:mysql://localhost/hishare?createDatabaseIfNotExist=true&amp;amp;useUnicode=true&amp;amp;characterEncoding=utf-8</jdbc.url>
+		<jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
+		<jdbc.username>root</jdbc.username>
+		<jdbc.password></jdbc.password>
 	</properties>
 </project>
