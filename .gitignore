@@ -25,3 +25,4 @@ META-INF
 *.DS_Store
 *.swp
 *.out
+*.keystore
