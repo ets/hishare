@@ -15,13 +15,7 @@
  ******************************************************************************/
 package org.opensafety.hishare.controller;
 
-import java.io.ByteArrayInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.UUID;
-
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.opensafety.hishare.service.interfaces.http.UploadParcel;
@@ -32,8 +26,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
-import sun.tools.tree.ThisExpression;
 
 @Controller
 @RequestMapping("/UploadParcel")

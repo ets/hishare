@@ -16,13 +16,9 @@
 package org.opensafety.hishare.managers.implementation.http;
 
 import java.util.Arrays;
-import java.util.UUID;
-
-import org.opensafety.hishare.dao.implementation.HibernateAuthenticationServerDao;
 import org.opensafety.hishare.dao.interfaces.AuthenticationServerDao;
 import org.opensafety.hishare.managers.interfaces.http.AuthenticationServerManager;
 import org.opensafety.hishare.model.AuthenticationServer;
-import org.opensafety.hishare.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class AuthenticationServerManagerImpl implements AuthenticationServerManager

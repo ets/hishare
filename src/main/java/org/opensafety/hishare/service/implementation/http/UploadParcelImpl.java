@@ -31,9 +31,6 @@ import org.opensafety.hishare.model.factories.PermissionFactory;
 import org.opensafety.hishare.service.interfaces.http.UploadParcel;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import sun.tools.tree.ThisExpression;
-import sun.util.logging.resources.logging;
-
 public class UploadParcelImpl implements UploadParcel
 {
 	@Autowired

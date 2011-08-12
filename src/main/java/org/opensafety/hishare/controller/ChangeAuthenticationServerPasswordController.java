@@ -15,7 +15,6 @@
  ******************************************************************************/
 package org.opensafety.hishare.controller;
 
-import org.opensafety.hishare.service.interfaces.http.AuthenticateUser;
 import org.opensafety.hishare.service.interfaces.http.ChangeAuthenticationServerPassword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

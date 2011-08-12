@@ -17,7 +17,6 @@ package org.opensafety.hishare.managers.implementation.http;
 
 import java.util.Date;
 import java.util.Calendar;
-import java.util.TimeZone;
 import java.util.UUID;
 
 import org.apache.commons.logging.Log;
@@ -26,8 +25,6 @@ import org.opensafety.hishare.dao.interfaces.UserDao;
 import org.opensafety.hishare.managers.interfaces.http.UserManager;
 import org.opensafety.hishare.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import sun.util.logging.resources.logging;
 
 public class UserManagerImpl implements UserManager
 {

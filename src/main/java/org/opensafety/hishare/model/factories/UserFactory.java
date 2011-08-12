@@ -15,11 +15,6 @@
  ******************************************************************************/
 package org.opensafety.hishare.model.factories;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
-import java.util.UUID;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.opensafety.hishare.model.User;
@@ -33,11 +28,6 @@ public class UserFactory
 	private Encryption encryption;
 	
 	private Log log = LogFactory.getLog(this.getClass());
-	
-	private Long createUserId()
-	{
-		return UUID.randomUUID().getLeastSignificantBits();
-	}
 	
 	private Long createUserId(String username, String authenticationServerName) throws CryptographyException
 	{
