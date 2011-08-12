@@ -62,7 +62,7 @@
 		autowire="byName">
 	</bean>
 
-	<!-- Remoting Manager Beans -->
+	<!-- Remoting Manager Beans
 	<bean id="parcelManagerRemoting"
 		class="org.opensafety.hishare.managers.implementation.remoting.ParcelManagerImpl"
 		autowire="byName">
@@ -72,7 +72,7 @@
 		class="org.opensafety.hishare.managers.implementation.remoting.PayloadManagerImpl"
 		autowire="byName">
 		<constructor-arg>
-			<value>8</value> <!-- Upload/Download Chunk Size -->
+			<value>8</value> <! Upload/Download Chunk Size >
 		</constructor-arg>
 	</bean>
 
@@ -85,4 +85,5 @@
 		class="org.opensafety.hishare.managers.implementation.remoting.UserManagerImpl"
 		autowire="byName">
 	</bean>
+	-->
 </beans>

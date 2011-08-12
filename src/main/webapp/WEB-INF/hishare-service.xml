@@ -69,7 +69,7 @@
 		autowire="byName">
 	</bean>
 
-	<!-- Remoting Service Beans -->
+	<!-- Remoting Service Beans >
 	<bean id="authenticateUserRemoting"
 		class="org.opensafety.hishare.service.implementation.remoting.AuthenticateUserImpl"
 		autowire="byName">
@@ -89,7 +89,7 @@
 		class="org.opensafety.hishare.service.implementation.remoting.DownloadParcelImpl"
 		autowire="byName">
 		<constructor-arg>
-			<value>3</value> <!-- Brute Force Breaking Wait Time (in seconds) -->
+			<value>3</value> <! Brute Force Breaking Wait Time (in seconds) >
 		</constructor-arg>
 	</bean>
 
@@ -98,7 +98,7 @@
 		autowire="byName">
 	</bean>
 
-	<!-- Service Exporters -->
+	<! Service Exporters >
 	<bean name="authenticateUserExporter"
 		class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
 		<property name="service" ref="authenticateUserRemoting" />
@@ -133,6 +133,6 @@
 		<property name="ServiceInterface"
 			value="org.opensafety.hishare.service.interfaces.remoting.UploadParcel" />
 	</bean>
-	<!-- -->
+	-->
 
 </beans>
