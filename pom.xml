@@ -34,7 +34,6 @@
 	<scm>
 		<connection>scm:git:git@github.com:ets/hishare.git</connection>
 		<url>scm:git:git@github.com:ets/hishare.git</url>
-		<developerConnection>scm:git:git@github.com:ets/hishare.git</developerConnection>
 	</scm>
 
 	<build>
