@@ -56,8 +56,7 @@ public class AddAuthenticationServerImpl implements AddAuthenticationServer
         }
         catch(CryptographyException e)
         {
-        	log.error("Authentication Server's password could not be hashed");
-            e.printStackTrace();
+        	log.error("Authentication Server's password could not be hashed", e);
             return addFailed;
         }
 		

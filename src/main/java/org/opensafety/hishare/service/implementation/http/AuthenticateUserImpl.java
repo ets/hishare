@@ -66,8 +66,7 @@ public class AuthenticateUserImpl extends HibernateDaoSupport implements Authent
             }
             catch(CryptographyException e)
             {
-            	log.error("Authentication Server's password could not be hashed");
-	            e.printStackTrace();
+            	log.error("Authentication Server's password could not be hashed", e);
 	            return errorAuthenticatingServer;
             }
 			

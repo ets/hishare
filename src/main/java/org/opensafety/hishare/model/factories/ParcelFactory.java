@@ -58,8 +58,7 @@ public class ParcelFactory
 		}
 		catch(CryptographyException e)
 		{
-			log.error("Parcel Creation Failed");
-			e.printStackTrace();
+			log.error("Parcel Creation Failed", e);
 		}
 		return newParcel;
 	}

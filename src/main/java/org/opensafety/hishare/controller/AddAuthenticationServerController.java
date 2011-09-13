@@ -35,9 +35,7 @@ public class AddAuthenticationServerController
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public
-	        ModelAndView
-	        authenticateUser(@RequestParam("authenticationServerName") String authenticationServerName)
+	public ModelAndView authenticateUser(@RequestParam("authenticationServerName") String authenticationServerName)
 	{
 		ModelAndView mav = new ModelAndView("outputString");
 		

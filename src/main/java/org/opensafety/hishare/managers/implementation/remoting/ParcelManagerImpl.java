@@ -104,8 +104,7 @@ public class ParcelManagerImpl implements ParcelManager
 			}
 			catch(CryptographyException e)
 			{
-				log.error("Password Matching Threw Exception!");
-				e.printStackTrace();
+				log.error("Password Matching Threw Exception!", e);
 				return null;
 			}
 		}
@@ -148,8 +147,7 @@ public class ParcelManagerImpl implements ParcelManager
 			}
 			catch(CryptographyException e)
 			{
-				log.error("Password Matching Threw Exception!");
-				e.printStackTrace();
+				log.error("Password Matching Threw Exception!", e);
 				return false;
 			}
 		}

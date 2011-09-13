@@ -70,14 +70,12 @@ public class FilePayloadDao implements PayloadDao
 		}
 		catch(FileNotFoundException e)
 		{
-			log.error("Encrypted file could not be found");
-			e.printStackTrace();
+			log.error("Encrypted file could not be found", e);
 			return null;
 		}
 		catch(IOException e)
 		{
-			log.error("Could not read encrypted file");
-			e.printStackTrace();
+			log.error("Could not read encrypted file", e);
 			return null;
 		}
 		
@@ -88,8 +86,7 @@ public class FilePayloadDao implements PayloadDao
 		}
 		catch(CryptographyException e)
 		{
-			log.error("Payload could not be decrypted");
-			e.printStackTrace();
+			log.error("Payload could not be decrypted", e);
 			return null;
 		}
 		
@@ -105,8 +102,7 @@ public class FilePayloadDao implements PayloadDao
 		}
 		catch(CryptographyException e)
 		{
-			log.error("Payload could not be encrypted");
-			e.printStackTrace();
+			log.error("Payload could not be encrypted", e);
 			return false;
 		}
 		
@@ -121,8 +117,7 @@ public class FilePayloadDao implements PayloadDao
 		}
 		catch(IOException e)
 		{
-			log.error("Could not write encrypted payload to file");
-			e.printStackTrace();
+			log.error("Could not write encrypted payload to file", e);
 			return false;
 		}
 		

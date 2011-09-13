@@ -42,8 +42,7 @@ public class UserFactory
 		}
 		catch(CryptographyException e)
 		{
-			log.error("Failed to encrypt user Id");
-			e.printStackTrace();
+			log.error("Failed to encrypt user Id", e);
 			return null;
 		}
 	}

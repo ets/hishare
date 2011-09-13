@@ -67,8 +67,8 @@
 							<port>8443</port>
 							<maxIdleTime>60000</maxIdleTime>
 							<keystore>jetty-ssl.keystore</keystore>
-							<password>jetty6</password>
-							<keyPassword>jetty6</keyPassword>
+							<password>password</password>
+							<keyPassword>password</keyPassword>
 						</connector>
 					</connectors>
 					<systemProperties>
@@ -134,6 +134,13 @@
 					</componentProperties>
 				</configuration>
 			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>  
+				<configuration>  
+					<source>1.5</source>  
+					<target>1.5</target>
+				</configuration>
+			</plugin> 
 		</plugins>
 	</build>
 
