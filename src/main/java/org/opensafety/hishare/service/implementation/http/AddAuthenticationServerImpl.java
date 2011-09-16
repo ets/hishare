@@ -38,14 +38,13 @@ public class AddAuthenticationServerImpl implements AddAuthenticationServer
 	private static final String addFailed = "Adding Authentication Server Failed";
 	
 	
-	public String addAuthenticationServer(String authenticationServerName)
+	public String addAuthenticationServer(String authenticationServerName, String authenticationServerPassword)
     {
 		if(authenticationServerManager.authenticationServerExists(authenticationServerName))
 		{
 			return addFailed;
 		}
 		
-		String authenticationServerPassword = "Secure Password";
 		byte[] hashedPassword;
 		byte[] salt;
             

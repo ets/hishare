@@ -49,9 +49,7 @@
 	<bean id="downloadParcel"
 		class="org.opensafety.hishare.service.implementation.http.DownloadParcelImpl"
 		autowire="byName">
-		<constructor-arg>
-			<value>3</value> <!-- Brute Force Breaking Wait Time (in seconds) -->
-		</constructor-arg>
+		<property name="BruteForceSpin" value="3"/>
 	</bean>
 
 	<bean id="uploadParcel"

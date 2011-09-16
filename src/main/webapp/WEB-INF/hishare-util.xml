@@ -34,16 +34,15 @@
 	<bean id="encryption"
 		class="org.opensafety.hishare.util.implementation.EncryptionImpl"
 		autowire="byName">
-		<constructor-arg value='255' />  <!-- Salt Length (Bytes) -->
-		<constructor-arg value='1000' />  <!-- PBE Iteration Count -->
-		<constructor-arg value='512' /> <!-- Password Length (Bits) -->
-		<constructor-arg value='512' /> <!-- PBE Key Length -->
-		<constructor-arg value='SHA1PRNG' />  <!-- Random Algorithm -->
-		<constructor-arg value='PBEWITHSHA256AND128BITAES-CBC-BC' />  <!-- PBE Algorithm -->
-		<constructor-arg value='AES/CBC/PKCS5Padding' />  <!-- Cipher Algorithm -->
-		<constructor-arg value='AES' /> <!-- Key Generator -->
-		<constructor-arg value='AES' /> <!-- KeySpec Algorithm -->
-		<constructor-arg value='SHA-512ZZZ' /> <!-- Password Hash Algorithm -->
+		<property name="saltLength" value='255'/>	<!-- Salt Length (Bytes) -->
+		<property name="pbeIterationCount" value='1000' />  <!-- PBE Iteration Count -->
+		<property name="pbeKeyLength" value='512' /> <!-- PBE Key Length -->
+		<property name="passwordLength" value='512' /> <!-- Password Length (Bits) -->
+		<property name="randomAlgorithm" value='SHA1PRNG' />  <!-- Random Algorithm -->
+		<property name="pbeAlgorithm" value='PBEWITHSHA256AND128BITAES-CBC-BC' />  <!-- PBE Algorithm -->
+		<property name="cipherAlgorithm" value='AES/CBC/PKCS5Padding' />  <!-- Cipher Algorithm -->
+		<property name="keyGenerator" value='AES' /> <!-- Key Generator -->
+		<property name="passwordHashAlgorithm" value='SHA-512' /> <!-- Password Hash Algorithm -->
 	</bean>
 
 </beans>

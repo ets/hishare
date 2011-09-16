@@ -34,23 +34,25 @@ public class AddAuthenticationServerController
 	{
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView authenticateUser(@RequestParam("authenticationServerName") String authenticationServerName)
+	@RequestMapping(method = RequestMethod.POST)
+	public ModelAndView authenticateUser(@RequestParam("authenticationServerName") String authenticationServerName, @RequestParam("authenticationServerPassword") String authenticationServerPassword)
 	{
+		//*
 		ModelAndView mav = new ModelAndView("outputString");
 		
 		mav.addObject("string", "This functionality is disabled");
 		
 		return mav;
+		//*/
 				
 		/*
 		ModelAndView mav;
 		
-		String successMessage = addAuthenticationServer.addAuthenticationServer(authenticationServerName);
+		String successMessage = addAuthenticationServer.addAuthenticationServer(authenticationServerName, authenticationServerPassword);
 		
 		mav = new ModelAndView("outputString");
 		mav.addObject("string", successMessage);
 		return mav;
-		*/
+		//*/
 	}
 }

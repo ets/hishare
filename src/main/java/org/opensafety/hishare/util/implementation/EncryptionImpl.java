@@ -52,12 +52,12 @@ public class EncryptionImpl implements Encryption
 	public EncryptionImpl()
 	{
 		this(64, 1000, 256, 256, "SHA1PRNG", "PBEWITHSHA256AND128BITAES-CBC-BC",
-		     "AES/CBC/PKCS5Padding", "AES", "AES", "SHA-512");
+		     "AES/CBC/PKCS5Padding", "AES", "SHA-512");
 	}
 	
 	public EncryptionImpl(int saltLength, int pbeIterationCount, int passwordLength,
 	        int pbeKeyLength, String randomAlgorithm, String pbeAlgorithm, String cipherAlgorithm,
-	        String keyGenerator, String keySpecAlgorithm, String passwordHashAlgorihtm)
+	        String keyGenerator, String passwordHashAlgorihtm)
 	{
 		Security.addProvider(new BouncyCastleProvider());
 		
@@ -73,6 +73,78 @@ public class EncryptionImpl implements Encryption
 		this.passwordHashAlgorithm = passwordHashAlgorihtm;
 	}
 	
+	public int getSaltLength() {
+		return saltLength;
+	}
+
+	public void setSaltLength(int saltLength) {
+		this.saltLength = saltLength;
+	}
+
+	public int getPbeIterationCount() {
+		return pbeIterationCount;
+	}
+
+	public void setPbeIterationCount(int pbeIterationCount) {
+		this.pbeIterationCount = pbeIterationCount;
+	}
+
+	public int getPbeKeyLength() {
+		return pbeKeyLength;
+	}
+
+	public void setPbeKeyLength(int pbeKeyLength) {
+		this.pbeKeyLength = pbeKeyLength;
+	}
+
+	public int getPasswordLength() {
+		return passwordLength;
+	}
+
+	public void setPasswordLength(int passwordLength) {
+		this.passwordLength = passwordLength;
+	}
+
+	public String getRandomAlgorithm() {
+		return randomAlgorithm;
+	}
+
+	public void setRandomAlgorithm(String randomAlgorithm) {
+		this.randomAlgorithm = randomAlgorithm;
+	}
+
+	public String getPbeAlgorithm() {
+		return pbeAlgorithm;
+	}
+
+	public void setPbeAlgorithm(String pbeAlgorithm) {
+		this.pbeAlgorithm = pbeAlgorithm;
+	}
+
+	public String getCipherAlgorithm() {
+		return cipherAlgorithm;
+	}
+
+	public void setCipherAlgorithm(String cipherAlgorithm) {
+		this.cipherAlgorithm = cipherAlgorithm;
+	}
+
+	public String getKeyGenerator() {
+		return keyGenerator;
+	}
+
+	public void setKeyGenerator(String keyGenerator) {
+		this.keyGenerator = keyGenerator;
+	}
+
+	public String getPasswordHashAlgorithm() {
+		return passwordHashAlgorithm;
+	}
+
+	public void setPasswordHashAlgorithm(String passwordHashAlgorithm) {
+		this.passwordHashAlgorithm = passwordHashAlgorithm;
+	}
+
 	public String createPassword() throws CryptographyException
 	{
 		KeyGenerator kgen;
@@ -219,6 +291,7 @@ public class EncryptionImpl implements Encryption
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			throw new CryptographyException(e.getMessage());
 		}
 	}

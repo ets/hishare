@@ -39,7 +39,7 @@ public class DownloadParcelImpl implements DownloadParcel
 	Log log = LogFactory.getLog(this.getClass());
 	
 	int BruteForceSpin;
-	
+
 	// genericCredentialsError is intentionally generic so as to avoid giving
 	// away information about which credentials succeeded or failed
 	private static final String genericCredentialsError = "The credentials supplied do not permit a download.";
@@ -52,6 +52,16 @@ public class DownloadParcelImpl implements DownloadParcel
 	public DownloadParcelImpl(int BruteForceSpin)
 	{
 		this.BruteForceSpin = BruteForceSpin;
+	}
+	
+	public int getBruteForceSpin()
+	{
+		return BruteForceSpin;
+	}
+
+	public void setBruteForceSpin(int bruteForceSpin)
+	{
+		BruteForceSpin = bruteForceSpin;
 	}
 	
 	public byte[] downloadParcel(String username, String authenticationId, String parcelId,

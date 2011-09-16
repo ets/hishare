@@ -52,6 +52,16 @@ public class ParcelManagerImpl implements ParcelManager
 		this.maximumParcelExpiration = parcelExpiration;
 	}
 	
+	public int getMaximumParcelExpiration()
+	{
+		return maximumParcelExpiration;
+	}
+	
+	public void setMaximumParcelExpiration(int maximumParcelExpiration)
+	{
+		this.maximumParcelExpiration = maximumParcelExpiration;
+	}
+	
 	private boolean notExpired(Parcel parcel)
     {
 		Date expiration = parcel.getExpirationDate();

@@ -33,6 +33,7 @@ public class UserManagerImpl implements UserManager
 	
 	Log log = LogFactory.getLog(this.getClass());
 	
+	//in hours
 	private int authenticationExpiration;
 	
 	public UserManagerImpl()
@@ -53,6 +54,16 @@ public class UserManagerImpl implements UserManager
 	public void persistUser(User user)
 	{
 		userDao.addUser(user);
+	}
+	
+	public int getAuthenticationExpiration()
+	{
+		return authenticationExpiration;
+	}
+	
+	public void setAuthenticationExpiration(int authenticationExpiration)
+	{
+		this.authenticationExpiration = authenticationExpiration;
 	}
 	
 	public String renewUserAuthentication(String username)
