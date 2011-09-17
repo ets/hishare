@@ -94,6 +94,11 @@ public class UserManagerImpl implements UserManager
 	{
 		User user = userDao.getByName(username);
 		
+		if(user == null)
+		{
+			return false;
+		}
+		
 		Date expiration = user.getAuthenticationExpiration();
 		Date now = Calendar.getInstance().getTime();
 		

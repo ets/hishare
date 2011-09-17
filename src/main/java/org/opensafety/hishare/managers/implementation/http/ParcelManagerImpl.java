@@ -136,6 +136,12 @@ public class ParcelManagerImpl implements ParcelManager
 		if(parcelDao.verifyParcelAvailable(parcelId))
 		{
 			Parcel parcel = parcelDao.getById(parcelId);
+			
+			if(parcel == null)
+			{
+				return false;
+			}
+			
 			if(notExpired(parcel))
 			{
 				try
