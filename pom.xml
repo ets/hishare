@@ -141,6 +141,20 @@
 					<target>1.5</target>
 				</configuration>
 			</plugin> 
+		      <!--  plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-surefire-plugin</artifactId>
+		        <version>2.5</version>
+		        <configuration>
+		              <excludes>
+		              </excludes>
+		          <parallel>true</parallel>
+		          <threadCount>10</threadCount>
+		            <systemPropertyVariables>
+		                <java.awt.headless>true</java.awt.headless>                                              
+		            </systemPropertyVariables>        
+		        </configuration>
+		      </plugin -->               			
 		</plugins>
 	</build>
 
@@ -154,9 +168,27 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
+	    <dependency>
+	        <groupId>org.dbunit</groupId>
+	        <artifactId>dbunit</artifactId>
+	      <version>${dbunit.version}</version>   
+	      <scope>test</scope>        
+	    </dependency>	
+	    <dependency>
+	      <groupId>org.jmock</groupId>
+	      <artifactId>jmock</artifactId>
+	      <version>${jmock.version}</version>
+	      <optional>true</optional>
+	    </dependency>
+	    <dependency>
+	      <groupId>org.jmock</groupId>
+	      <artifactId>jmock-junit4</artifactId>
+	      <version>${jmock.version}</version>
+	      <optional>true</optional>
+	    </dependency>	    	
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
@@ -366,5 +398,8 @@
 		<jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
 		<jdbc.username>root</jdbc.username>
 		<jdbc.password></jdbc.password>
+	    <junit.version>4.7</junit.version>
+	    <dbunit.version>2.4.5</dbunit.version>
+	    <jmock.version>2.4.0</jmock.version>		
 	</properties>
 </project>

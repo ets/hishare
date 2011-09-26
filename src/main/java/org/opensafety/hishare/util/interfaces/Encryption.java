@@ -33,8 +33,7 @@ public interface Encryption
 	
 	public byte[] createSalt() throws CryptographyException;
 	
-	public byte[]
-	        decryptPayload(Parcel parcel, byte[] encryptedPayload) throws CryptographyException;
+	public byte[] decryptPayload(Parcel parcel, byte[] encryptedPayload) throws CryptographyException;
 	
 	public byte[] encryptPayload(Parcel parcel, byte[] payload) throws CryptographyException;
 	
