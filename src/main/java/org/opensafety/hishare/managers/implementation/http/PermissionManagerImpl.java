@@ -24,7 +24,9 @@ import org.opensafety.hishare.model.Permission;
 import org.opensafety.hishare.model.PermissionLevel;
 import org.opensafety.hishare.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PermissionManagerImpl implements PermissionManager
 {
 	@Autowired

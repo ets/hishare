@@ -25,7 +25,11 @@ import org.opensafety.hishare.dao.interfaces.UserDao;
 import org.opensafety.hishare.managers.interfaces.UserManager;
 import org.opensafety.hishare.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 
+@Configuration
 public class UserManagerImpl implements UserManager
 {
 	@Autowired
@@ -34,16 +38,10 @@ public class UserManagerImpl implements UserManager
 	Log log = LogFactory.getLog(this.getClass());
 	
 	//in hours
-	private int authenticationExpiration;
+	private @Value("${services.authenticationExpiration}") int authenticationExpiration;
 	
 	public UserManagerImpl()
 	{
-		this(24);
-	}
-	
-	public UserManagerImpl(int authenticationExpiration)
-	{
-		this.authenticationExpiration = authenticationExpiration;
 	}
 	
 	public User getByUsername(String username)

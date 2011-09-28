@@ -21,7 +21,9 @@ import org.opensafety.hishare.dao.interfaces.PayloadDao;
 import org.opensafety.hishare.managers.interfaces.PayloadManager;
 import org.opensafety.hishare.model.Parcel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PayloadManagerImpl implements PayloadManager
 {
 	@Autowired

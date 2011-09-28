@@ -28,7 +28,11 @@ import org.opensafety.hishare.model.Parcel;
 import org.opensafety.hishare.util.interfaces.Encryption;
 import org.opensafety.hishare.util.interfaces.Encryption.CryptographyException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 
+@Configuration
 public class ParcelManagerImpl implements ParcelManager
 {
 	@Autowired
@@ -38,18 +42,12 @@ public class ParcelManagerImpl implements ParcelManager
 	@Autowired
 	private Encryption encryption;
 	
-	private int maximumParcelExpiration;
+	private @Value("${services.maximumParcelExpiration}") int maximumParcelExpiration;
 	
 	Log log = LogFactory.getLog(this.getClass());
 	
 	public ParcelManagerImpl()
 	{
-		this(1);
-	}
-	
-	public ParcelManagerImpl(int parcelExpiration)
-	{
-		this.maximumParcelExpiration = parcelExpiration;
 	}
 	
 	public int getMaximumParcelExpiration()

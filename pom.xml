@@ -369,6 +369,11 @@
 			<artifactId>bcprov-jdk14</artifactId>
 			<version>${bouncycastle.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>${cglib.version}</version>
+		</dependency>
 
 	</dependencies>
 
@@ -400,6 +405,7 @@
 		<jdbc.password></jdbc.password>
 	    <junit.version>4.7</junit.version>
 	    <dbunit.version>2.4.5</dbunit.version>
-	    <jmock.version>2.4.0</jmock.version>		
+	    <jmock.version>2.4.0</jmock.version>
+	    <cglib.version>2.2.2</cglib.version>
 	</properties>
 </project>

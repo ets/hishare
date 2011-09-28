@@ -25,7 +25,6 @@
 		<param-value>
 	   /WEB-INF/application-context.xml
 	   /WEB-INF/hishare-dao.xml
-	   /WEB-INF/hishare-manager.xml
 	   /WEB-INF/hishare-service.xml
 	   /WEB-INF/hishare-view.xml
 	   /WEB-INF/hishare-servlet.xml

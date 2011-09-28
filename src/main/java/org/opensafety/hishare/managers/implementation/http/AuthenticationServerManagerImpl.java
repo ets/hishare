@@ -20,7 +20,9 @@ import org.opensafety.hishare.dao.interfaces.AuthenticationServerDao;
 import org.opensafety.hishare.managers.interfaces.AuthenticationServerManager;
 import org.opensafety.hishare.model.AuthenticationServer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AuthenticationServerManagerImpl implements AuthenticationServerManager
 {
 	@Autowired
