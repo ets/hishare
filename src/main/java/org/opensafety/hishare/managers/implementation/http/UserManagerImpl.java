@@ -38,7 +38,7 @@ public class UserManagerImpl implements UserManager
 	Log log = LogFactory.getLog(this.getClass());
 	
 	//in hours
-	private @Value("${services.authenticationExpiration}") int authenticationExpiration;
+	private @Value("${managers.authenticationExpiration}") int authenticationExpiration;
 	
 	public UserManagerImpl()
 	{

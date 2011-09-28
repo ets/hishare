@@ -28,8 +28,10 @@ import org.opensafety.hishare.util.interfaces.Encryption;
 import org.opensafety.hishare.util.interfaces.Encryption.CryptographyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.stereotype.Component;
 
-public class AuthenticateUserImpl extends HibernateDaoSupport implements AuthenticateUser
+@Component
+public class AuthenticateUserImpl implements AuthenticateUser
 {
 	@Autowired
 	private UserManager userManager;

@@ -24,7 +24,9 @@ import org.opensafety.hishare.service.interfaces.ChangeAuthenticationServerPassw
 import org.opensafety.hishare.util.interfaces.Encryption;
 import org.opensafety.hishare.util.interfaces.Encryption.CryptographyException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ChangeAuthenticationServerPasswordImpl implements ChangeAuthenticationServerPassword
 {
 	@Autowired

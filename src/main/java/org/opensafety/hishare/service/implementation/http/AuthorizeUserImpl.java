@@ -30,7 +30,9 @@ import org.opensafety.hishare.model.factories.PermissionFactory;
 import org.opensafety.hishare.model.factories.UserFactory;
 import org.opensafety.hishare.service.interfaces.AuthorizeUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AuthorizeUserImpl implements AuthorizeUser
 {
 	@Autowired

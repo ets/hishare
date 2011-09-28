@@ -30,7 +30,7 @@
      http://www.springframework.org/schema/aop 
      http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
-	<!-- Service Beans -->
+	<!-- Service Beans
 	<bean id="authenticateUser"
 		class="org.opensafety.hishare.service.implementation.http.AuthenticateUserImpl"
 		autowire="byName">
@@ -66,5 +66,6 @@
 		class="org.opensafety.hishare.service.implementation.http.AddAuthenticationServerImpl"
 		autowire="byName">
 	</bean>
+	-->
 	
 </beans>

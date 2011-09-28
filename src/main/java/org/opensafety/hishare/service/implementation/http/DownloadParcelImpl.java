@@ -26,7 +26,10 @@ import org.opensafety.hishare.model.Parcel;
 import org.opensafety.hishare.model.User;
 import org.opensafety.hishare.service.interfaces.DownloadParcel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class DownloadParcelImpl implements DownloadParcel
 {
 	@Autowired
@@ -38,7 +41,7 @@ public class DownloadParcelImpl implements DownloadParcel
 	
 	Log log = LogFactory.getLog(this.getClass());
 	
-	int BruteForceSpin;
+	private @Value("${services.bruteForceSpin}") int BruteForceSpin;
 
 	// genericCredentialsError is intentionally generic so as to avoid giving
 	// away information about which credentials succeeded or failed
@@ -46,12 +49,6 @@ public class DownloadParcelImpl implements DownloadParcel
 	
 	public DownloadParcelImpl()
 	{
-		this(0);
-	}
-	
-	public DownloadParcelImpl(int BruteForceSpin)
-	{
-		this.BruteForceSpin = BruteForceSpin;
 	}
 	
 	public int getBruteForceSpin()

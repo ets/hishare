@@ -42,7 +42,7 @@ public class ParcelManagerImpl implements ParcelManager
 	@Autowired
 	private Encryption encryption;
 	
-	private @Value("${services.maximumParcelExpiration}") int maximumParcelExpiration;
+	private @Value("${managers.maximumParcelExpiration}") int maximumParcelExpiration;
 	
 	Log log = LogFactory.getLog(this.getClass());
 	

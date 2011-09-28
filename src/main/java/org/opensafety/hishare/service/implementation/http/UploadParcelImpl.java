@@ -30,7 +30,9 @@ import org.opensafety.hishare.model.factories.ParcelFactory;
 import org.opensafety.hishare.model.factories.PermissionFactory;
 import org.opensafety.hishare.service.interfaces.UploadParcel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UploadParcelImpl implements UploadParcel
 {
 	@Autowired
