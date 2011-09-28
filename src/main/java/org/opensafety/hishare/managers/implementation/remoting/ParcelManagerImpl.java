@@ -22,8 +22,8 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.opensafety.hishare.dao.interfaces.ParcelDao;
-import org.opensafety.hishare.managers.interfaces.remoting.ParcelManager;
-import org.opensafety.hishare.managers.interfaces.remoting.PayloadManager;
+import org.opensafety.hishare.managers.interfaces.ParcelManager;
+import org.opensafety.hishare.managers.interfaces.PayloadManager;
 import org.opensafety.hishare.model.Parcel;
 import org.opensafety.hishare.util.interfaces.Encryption;
 import org.opensafety.hishare.util.interfaces.Encryption.CryptographyException;
@@ -50,14 +50,14 @@ public class ParcelManagerImpl implements ParcelManager
 	
 	public String beginDownload(Parcel parcel)
 	{
-		String transferKey = payloadManager.beginDownload(parcel);
+		String transferKey = "Transfer Key";//payloadManager.beginDownload(parcel);
 		parcelDownloads.put(transferKey, parcel);
 		return transferKey;
 	}
 	
 	public String beginUpload(Parcel parcel)
 	{
-		String transferKey = payloadManager.beginUpload();
+		String transferKey = "Transfer Key";//payloadManager.beginUpload();
 		parcelUploads.put(transferKey, parcel);
 		return transferKey;
 	}
@@ -76,12 +76,12 @@ public class ParcelManagerImpl implements ParcelManager
 	
 	public boolean downloadAvailable(String transferKey)
 	{
-		return payloadManager.downloadAvailable(transferKey);
+		return false;//payloadManager.downloadAvailable(transferKey);
 	}
 	
 	public Integer getChunkSize()
 	{
-		return payloadManager.getChunkSize();
+		return 512;//payloadManager.getChunkSize();
 	}
 	
 	public Parcel getParcel(String parcelId, String parcelPassword)
@@ -119,7 +119,7 @@ public class ParcelManagerImpl implements ParcelManager
 	
 	public byte[] resolveUpload(String transferKey)
 	{
-		return payloadManager.resolveUpload(transferKey);
+		return ("Payload").getBytes();//payloadManager.resolveUpload(transferKey);
 	}
 	
 	public void updateParcel(Parcel parcel)
@@ -129,7 +129,7 @@ public class ParcelManagerImpl implements ParcelManager
 	
 	public Boolean uploadChunk(String transferKey, byte[] chunk)
 	{
-		return payloadManager.uploadChunk(transferKey, chunk);
+		return false;//payloadManager.uploadChunk(transferKey, chunk);
 	}
 	
 	/*
@@ -151,6 +151,16 @@ public class ParcelManagerImpl implements ParcelManager
 				return false;
 			}
 		}
+		return false;
+	}
+
+	public byte[] downloadPayload(Parcel parcel) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean verifyDaysToLive(int daysToLive) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 }

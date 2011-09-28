@@ -19,11 +19,11 @@ import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.opensafety.hishare.managers.interfaces.http.AuthenticationServerManager;
-import org.opensafety.hishare.managers.interfaces.http.UserManager;
+import org.opensafety.hishare.managers.interfaces.AuthenticationServerManager;
+import org.opensafety.hishare.managers.interfaces.UserManager;
 import org.opensafety.hishare.model.User;
 import org.opensafety.hishare.model.factories.UserFactory;
-import org.opensafety.hishare.service.interfaces.http.AuthenticateUser;
+import org.opensafety.hishare.service.interfaces.AuthenticateUser;
 import org.opensafety.hishare.util.interfaces.Encryption;
 import org.opensafety.hishare.util.interfaces.Encryption.CryptographyException;
 import org.springframework.beans.factory.annotation.Autowired;

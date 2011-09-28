@@ -19,8 +19,8 @@ import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.opensafety.hishare.managers.interfaces.http.AuthenticationServerManager;
-import org.opensafety.hishare.service.interfaces.http.ChangeAuthenticationServerPassword;
+import org.opensafety.hishare.managers.interfaces.AuthenticationServerManager;
+import org.opensafety.hishare.service.interfaces.ChangeAuthenticationServerPassword;
 import org.opensafety.hishare.util.interfaces.Encryption;
 import org.opensafety.hishare.util.interfaces.Encryption.CryptographyException;
 import org.springframework.beans.factory.annotation.Autowired;

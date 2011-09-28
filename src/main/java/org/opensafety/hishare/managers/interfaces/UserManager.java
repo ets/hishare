@@ -13,23 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.opensafety.hishare.managers.interfaces.http;
+package org.opensafety.hishare.managers.interfaces;
 
-import org.opensafety.hishare.model.Parcel;
+import org.opensafety.hishare.model.User;
 
-public interface ParcelManager
+public interface UserManager
 {
-	public boolean deleteParcel(Parcel parcel);
+	User getByUsername(String username);
 	
-	public byte[] downloadPayload(Parcel parcel);
+	/* Persistence */
+	void persistUser(User user);
 	
-	public Parcel getParcel(String parcelId, String parcelPassword);
+	/* Authentication */
+	String renewUserAuthentication(String username);
 	
-	public void persistParcel(Parcel parcel, byte[] payload);
+	void updateUser(User owner);
 	
-	public void updateParcel(Parcel parcel);
+	boolean userExists(String username);
 	
-	public boolean verifyParcelAvailable(String parcelId, String parcelPassword);
-
-	public boolean verifyDaysToLive(int daysToLive);
+	boolean verifyAuthentication(String username, String authenticationId);
 }

@@ -19,16 +19,16 @@ import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.opensafety.hishare.managers.interfaces.http.ParcelManager;
-import org.opensafety.hishare.managers.interfaces.http.PermissionManager;
-import org.opensafety.hishare.managers.interfaces.http.UserManager;
+import org.opensafety.hishare.managers.interfaces.ParcelManager;
+import org.opensafety.hishare.managers.interfaces.PermissionManager;
+import org.opensafety.hishare.managers.interfaces.UserManager;
 import org.opensafety.hishare.model.Parcel;
 import org.opensafety.hishare.model.Permission;
 import org.opensafety.hishare.model.PermissionLevel;
 import org.opensafety.hishare.model.User;
 import org.opensafety.hishare.model.factories.ParcelFactory;
 import org.opensafety.hishare.model.factories.PermissionFactory;
-import org.opensafety.hishare.service.interfaces.http.UploadParcel;
+import org.opensafety.hishare.service.interfaces.UploadParcel;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class UploadParcelImpl implements UploadParcel

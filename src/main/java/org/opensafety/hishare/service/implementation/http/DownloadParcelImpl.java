@@ -19,12 +19,12 @@ import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.opensafety.hishare.managers.interfaces.http.ParcelManager;
-import org.opensafety.hishare.managers.interfaces.http.PermissionManager;
-import org.opensafety.hishare.managers.interfaces.http.UserManager;
+import org.opensafety.hishare.managers.interfaces.ParcelManager;
+import org.opensafety.hishare.managers.interfaces.PermissionManager;
+import org.opensafety.hishare.managers.interfaces.UserManager;
 import org.opensafety.hishare.model.Parcel;
 import org.opensafety.hishare.model.User;
-import org.opensafety.hishare.service.interfaces.http.DownloadParcel;
+import org.opensafety.hishare.service.interfaces.DownloadParcel;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class DownloadParcelImpl implements DownloadParcel

@@ -15,16 +15,16 @@
  ******************************************************************************/
 package org.opensafety.hishare.service.implementation.remoting;
 
-import org.opensafety.hishare.managers.interfaces.remoting.ParcelManager;
-import org.opensafety.hishare.managers.interfaces.remoting.PermissionManager;
-import org.opensafety.hishare.managers.interfaces.remoting.UserManager;
+import org.opensafety.hishare.managers.interfaces.ParcelManager;
+import org.opensafety.hishare.managers.interfaces.PermissionManager;
+import org.opensafety.hishare.managers.interfaces.UserManager;
 import org.opensafety.hishare.model.Parcel;
 import org.opensafety.hishare.model.Permission;
 import org.opensafety.hishare.model.PermissionLevel;
 import org.opensafety.hishare.model.User;
 import org.opensafety.hishare.model.factories.ParcelFactory;
 import org.opensafety.hishare.model.factories.PermissionFactory;
-import org.opensafety.hishare.service.interfaces.remoting.UploadParcel;
+import org.opensafety.hishare.service.interfaces.UploadParcel;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class UploadParcelImpl implements UploadParcel
@@ -54,7 +54,7 @@ public class UploadParcelImpl implements UploadParcel
 			Parcel newParcel;
 			newParcel = parcelFactory.createParcel(parcelName, daysToLive);
 			
-			String transferKey = parcelManagerRemoting.beginUpload(newParcel);
+			String transferKey = "Transfer Key";//parcelManagerRemoting.beginUpload(newParcel);
 			return transferKey;
 		}
 		
@@ -65,10 +65,10 @@ public class UploadParcelImpl implements UploadParcel
 	{
 		if(userManagerRemoting.verifyAuthentication(username, authenticationId))
 		{
-			byte[] payload = parcelManagerRemoting.resolveUpload(transferKey);
+			byte[] payload = ("payload").getBytes();//parcelManagerRemoting.resolveUpload(transferKey);
 			if(payload != null)
 			{
-				Parcel parcel = parcelManagerRemoting.closeUpload(transferKey);
+				Parcel parcel = new Parcel();//parcelManagerRemoting.closeUpload(transferKey);
 				if(parcel != null)
 				{
 					// Retrieve the owner
@@ -95,7 +95,7 @@ public class UploadParcelImpl implements UploadParcel
 	
 	public Integer getChunkSize()
 	{
-		return parcelManagerRemoting.getChunkSize();
+		return 512;//parcelManagerRemoting.getChunkSize();
 	}
 	
 	public String[] uploadParcel(String username, String authenticationId, String parcelName,
@@ -135,7 +135,7 @@ public class UploadParcelImpl implements UploadParcel
 	{
 		if(userManagerRemoting.verifyAuthentication(username, authenticationId))
 		{
-			return parcelManagerRemoting.uploadChunk(transferKey, chunk);
+			return false;//parcelManagerRemoting.uploadChunk(transferKey, chunk);
 		}
 		
 		return false;

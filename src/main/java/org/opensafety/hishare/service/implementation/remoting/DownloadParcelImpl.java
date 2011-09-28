@@ -17,12 +17,12 @@ package org.opensafety.hishare.service.implementation.remoting;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.opensafety.hishare.managers.interfaces.remoting.ParcelManager;
-import org.opensafety.hishare.managers.interfaces.remoting.PermissionManager;
-import org.opensafety.hishare.managers.interfaces.remoting.UserManager;
+import org.opensafety.hishare.managers.interfaces.ParcelManager;
+import org.opensafety.hishare.managers.interfaces.PermissionManager;
+import org.opensafety.hishare.managers.interfaces.UserManager;
 import org.opensafety.hishare.model.Parcel;
 import org.opensafety.hishare.model.User;
-import org.opensafety.hishare.service.interfaces.remoting.DownloadParcel;
+import org.opensafety.hishare.service.interfaces.DownloadParcel;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class DownloadParcelImpl implements DownloadParcel
@@ -72,7 +72,7 @@ public class DownloadParcelImpl implements DownloadParcel
 					;
 				}
 				{
-					String transferKey = parcelManager.beginDownload(parcel);
+					String transferKey = "Transfer Key";//parcelManager.beginDownload(parcel);
 					return transferKey;
 				}
 			}
@@ -87,7 +87,7 @@ public class DownloadParcelImpl implements DownloadParcel
 		{
 			if(parcelManager.verifyParcelAvailable(parcelId, parcelPassword))
 			{
-				return parcelManager.downloadAvailable(transferKey);
+				return false;//parcelManager.downloadAvailable(transferKey);
 			}
 		}
 		return false;
@@ -107,6 +107,12 @@ public class DownloadParcelImpl implements DownloadParcel
 	
 	public Integer getChunkSize()
 	{
-		return parcelManager.getChunkSize();
+		return 512;//parcelManager.getChunkSize();
+	}
+
+	public byte[] downloadParcel(String username, String authenticationId,
+			String parcelId, String parcelPassword) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

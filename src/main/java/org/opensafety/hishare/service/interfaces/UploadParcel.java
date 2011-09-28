@@ -13,20 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.opensafety.hishare.service.interfaces.remoting;
+package org.opensafety.hishare.service.interfaces;
 
 public interface UploadParcel
 {
-	String beginParcelUpload(String username, String authenticationId, String parcelName,
-	                         Integer daysToLive);
-	
-	String finishParcelUpload(String username, String authenticationId, String transferKey);
-	
-	/**
-	 * Size in bytes of the bytes to be uplaoded
-	 */
-	Integer getChunkSize();
-	
-	Boolean uploadParcelChunk(String username, String authenticationId, String transferKey,
-	                          byte[] chunk);
+	String[] uploadParcel(String username, String authenticationId, String parcelName,
+	                      Integer daysToLive, byte[] payload);
 }

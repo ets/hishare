@@ -16,7 +16,7 @@
 package org.opensafety.hishare.controller;
 
 import org.opensafety.hishare.model.PermissionLevel;
-import org.opensafety.hishare.service.interfaces.http.AuthorizeUser;
+import org.opensafety.hishare.service.interfaces.AuthorizeUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

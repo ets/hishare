@@ -15,16 +15,16 @@
  ******************************************************************************/
 package org.opensafety.hishare.service.implementation.remoting;
 
-import org.opensafety.hishare.managers.interfaces.remoting.ParcelManager;
-import org.opensafety.hishare.managers.interfaces.remoting.PermissionManager;
-import org.opensafety.hishare.managers.interfaces.remoting.UserManager;
+import org.opensafety.hishare.managers.interfaces.ParcelManager;
+import org.opensafety.hishare.managers.interfaces.PermissionManager;
+import org.opensafety.hishare.managers.interfaces.UserManager;
 import org.opensafety.hishare.model.Parcel;
 import org.opensafety.hishare.model.Permission;
 import org.opensafety.hishare.model.PermissionLevel;
 import org.opensafety.hishare.model.User;
 import org.opensafety.hishare.model.factories.PermissionFactory;
 import org.opensafety.hishare.model.factories.UserFactory;
-import org.opensafety.hishare.service.interfaces.remoting.AuthorizeUser;
+import org.opensafety.hishare.service.interfaces.AuthorizeUser;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class AuthorizeUserImpl implements AuthorizeUser
@@ -69,6 +69,13 @@ public class AuthorizeUserImpl implements AuthorizeUser
 			}
 		}
 		return genericCredentialsError;
+	}
+
+	public String authorizeUser(String authorizingUser,
+			String authenticationId, String parcelId, String parcelPassword,
+			String userToAuthorize, PermissionLevel permissionLevel) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

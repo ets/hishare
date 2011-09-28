@@ -15,7 +15,7 @@
  ******************************************************************************/
 package org.opensafety.hishare.controller;
 
-import org.opensafety.hishare.service.interfaces.http.DownloadParcel;
+import org.opensafety.hishare.service.interfaces.DownloadParcel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

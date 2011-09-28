@@ -18,7 +18,7 @@ package org.opensafety.hishare.managers.implementation.remoting;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.opensafety.hishare.dao.interfaces.PermissionDao;
-import org.opensafety.hishare.managers.interfaces.remoting.PermissionManager;
+import org.opensafety.hishare.managers.interfaces.PermissionManager;
 import org.opensafety.hishare.model.Parcel;
 import org.opensafety.hishare.model.Permission;
 import org.opensafety.hishare.model.PermissionLevel;
@@ -59,5 +59,10 @@ public class PermissionManagerImpl implements PermissionManager
 		{
 			permissionDao.addPermission(permission);
 		}
+	}
+
+	public boolean hasAuthorizePermission(User authorizer, Parcel parcel) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

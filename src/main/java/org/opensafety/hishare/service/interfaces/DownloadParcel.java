@@ -13,23 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.opensafety.hishare.managers.interfaces.remoting;
+package org.opensafety.hishare.service.interfaces;
 
-import org.opensafety.hishare.model.User;
-
-public interface UserManager
+public interface DownloadParcel
 {
-	User getByUsername(String username);
-	
-	/* Persistence */
-	void persistUser(User user);
-	
-	/* Authentication */
-	String renewUserAuthentication(String username);
-	
-	void updateUser(User owner);
-	
-	boolean userExists(String username);
-	
-	boolean verifyAuthentication(String username, String authenticationId);
+	byte[] downloadParcel(String username, String authenticationId, String parcelId,
+	                      String parcelPassword);
 }

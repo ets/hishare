@@ -17,10 +17,10 @@ package org.opensafety.hishare.service.implementation.http;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.opensafety.hishare.managers.interfaces.http.AuthenticationServerManager;
+import org.opensafety.hishare.managers.interfaces.AuthenticationServerManager;
 import org.opensafety.hishare.model.AuthenticationServer;
 import org.opensafety.hishare.model.factories.AuthenticationServerFactory;
-import org.opensafety.hishare.service.interfaces.http.AddAuthenticationServer;
+import org.opensafety.hishare.service.interfaces.AddAuthenticationServer;
 import org.opensafety.hishare.util.interfaces.Encryption;
 import org.opensafety.hishare.util.interfaces.Encryption.CryptographyException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -22,7 +22,7 @@ import java.util.UUID;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.opensafety.hishare.dao.interfaces.UserDao;
-import org.opensafety.hishare.managers.interfaces.http.UserManager;
+import org.opensafety.hishare.managers.interfaces.UserManager;
 import org.opensafety.hishare.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 

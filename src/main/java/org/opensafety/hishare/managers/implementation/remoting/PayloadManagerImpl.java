@@ -24,7 +24,7 @@ import org.apache.commons.logging.LogFactory;
 import org.opensafety.hishare.dao.interfaces.PayloadDao;
 import org.opensafety.hishare.managers.implementation.remoting.helpers.DownloadingPayload;
 import org.opensafety.hishare.managers.implementation.remoting.helpers.UploadingPayload;
-import org.opensafety.hishare.managers.interfaces.remoting.PayloadManager;
+import org.opensafety.hishare.managers.interfaces.PayloadManager;
 import org.opensafety.hishare.model.Parcel;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -128,5 +128,10 @@ public class PayloadManagerImpl implements PayloadManager
 			return true;
 		}
 		return false;
+	}
+
+	public byte[] downloadPayload(Parcel parcel) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

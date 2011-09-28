@@ -13,15 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.opensafety.hishare.service.interfaces.remoting;
+package org.opensafety.hishare.managers.interfaces;
 
-import org.opensafety.hishare.model.PermissionLevel;
+import org.opensafety.hishare.model.Parcel;
+import org.opensafety.hishare.model.Permission;
+import org.opensafety.hishare.model.User;
 
-public interface AuthorizeUser
+public interface PermissionManager
 {
+	boolean deletePermissions(Parcel parcel);
 	
-	        String
-	        authorize(String authorizingUser, String authenticationId, String parcelId,
-	                  String parcelPassword, String userToAuthorize, PermissionLevel permissionLevel);
+	boolean hasAuthorizePermission(User authorizer, Parcel parcel);
 	
+	boolean hasDeletePermission(User user, Parcel parcel);
+	
+	boolean hasDownloadPermission(User user, Parcel parcel);
+	
+	void persistPermission(Permission permission);
 }

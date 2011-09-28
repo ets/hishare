@@ -13,25 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.opensafety.hishare.managers.interfaces.remoting;
+package org.opensafety.hishare.service.interfaces;
 
-import org.opensafety.hishare.model.Parcel;
-
-public interface PayloadManager
+public interface DeleteParcel
 {
-	String beginDownload(Parcel parcel);
+	String deleteParcel(String username, String authenticationId, String parcelId,
+	                    String parcelPassword);
 	
-	String beginUpload();
-	
-	boolean deletePayload(String payloadLocation);
-	
-	boolean downloadAvailable(String transferKey);
-	
-	Integer getChunkSize();
-	
-	boolean persistPayload(Parcel parcel, byte[] payload);
-	
-	byte[] resolveUpload(String transferKey);
-	
-	Boolean uploadChunk(String transferKey, byte[] chunk);
 }

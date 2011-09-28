@@ -13,11 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.opensafety.hishare.service.interfaces.http;
+package org.opensafety.hishare.managers.interfaces;
 
-public interface AddAuthenticationServer
+import org.opensafety.hishare.model.AuthenticationServer;
+
+public interface AuthenticationServerManager
 {
 
-	String addAuthenticationServer(String authenticationServerName, String authenticationServerPassword);
+	boolean authenticationServerExists(String authenticationServerDomain);
+
+	byte[] getSalt(String authenticationServerDomain);
+
+	boolean authenticationServerVerify(String authenticationServerDomain, byte[] hashedPassword);
+
+	void changePassword(String authenticationServerName, byte[] hashedNewPassword, byte[] salt);
+
+	void persistServer(AuthenticationServer server);
 	
 }

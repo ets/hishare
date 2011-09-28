@@ -13,12 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.opensafety.hishare.service.interfaces.http;
+package org.opensafety.hishare.managers.interfaces;
 
-public interface ChangeAuthenticationServerPassword
+import org.opensafety.hishare.model.Parcel;
+
+public interface ParcelManager
 {
+	public boolean deleteParcel(Parcel parcel);
 	
-	String changePassword(String authenticationServerName, String authenticationServerPassword,
-	                      String newAuthenticationServerPassword);
+	public byte[] downloadPayload(Parcel parcel);
 	
+	public Parcel getParcel(String parcelId, String parcelPassword);
+	
+	public void persistParcel(Parcel parcel, byte[] payload);
+	
+	public void updateParcel(Parcel parcel);
+	
+	public boolean verifyParcelAvailable(String parcelId, String parcelPassword);
+
+	public boolean verifyDaysToLive(int daysToLive);
 }

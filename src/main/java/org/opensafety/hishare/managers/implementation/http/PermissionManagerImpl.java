@@ -18,7 +18,7 @@ package org.opensafety.hishare.managers.implementation.http;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.opensafety.hishare.dao.interfaces.PermissionDao;
-import org.opensafety.hishare.managers.interfaces.http.PermissionManager;
+import org.opensafety.hishare.managers.interfaces.PermissionManager;
 import org.opensafety.hishare.model.Parcel;
 import org.opensafety.hishare.model.Permission;
 import org.opensafety.hishare.model.PermissionLevel;

@@ -13,10 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.opensafety.hishare.service.interfaces.http;
+package org.opensafety.hishare.managers.interfaces;
 
-public interface AuthenticateUser
+import org.opensafety.hishare.model.Parcel;
+
+public interface PayloadManager
 {
-	String authenticate(String username, String authenticationServerName,
-                        String authenticationServerPassword);
+	boolean deletePayload(String payloadLocation);
+	
+	public byte[] downloadPayload(Parcel parcel);
+	
+	boolean persistPayload(Parcel parcel, byte[] payload);
 }

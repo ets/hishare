@@ -15,12 +15,12 @@
  ******************************************************************************/
 package org.opensafety.hishare.service.implementation.remoting;
 
-import org.opensafety.hishare.managers.interfaces.remoting.ParcelManager;
-import org.opensafety.hishare.managers.interfaces.remoting.PermissionManager;
-import org.opensafety.hishare.managers.interfaces.remoting.UserManager;
+import org.opensafety.hishare.managers.interfaces.ParcelManager;
+import org.opensafety.hishare.managers.interfaces.PermissionManager;
+import org.opensafety.hishare.managers.interfaces.UserManager;
 import org.opensafety.hishare.model.Parcel;
 import org.opensafety.hishare.model.User;
-import org.opensafety.hishare.service.interfaces.remoting.DeleteParcel;
+import org.opensafety.hishare.service.interfaces.DeleteParcel;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class DeleteParcelImpl implements DeleteParcel
