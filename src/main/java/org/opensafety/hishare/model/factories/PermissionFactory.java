@@ -21,7 +21,9 @@ import org.opensafety.hishare.model.Parcel;
 import org.opensafety.hishare.model.Permission;
 import org.opensafety.hishare.model.PermissionLevel;
 import org.opensafety.hishare.model.User;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PermissionFactory
 {
 	private Long createPermissionId()

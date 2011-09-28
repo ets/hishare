@@ -57,29 +57,4 @@
 		class="org.opensafety.hishare.managers.implementation.http.AuthenticationServerManagerImpl"
 		autowire="byName">
 	</bean>
-
-	<!-- Remoting Manager Beans
-	<bean id="parcelManagerRemoting"
-		class="org.opensafety.hishare.managers.implementation.remoting.ParcelManagerImpl"
-		autowire="byName">
-	</bean>
-
-	<bean id="payloadManagerRemoting"
-		class="org.opensafety.hishare.managers.implementation.remoting.PayloadManagerImpl"
-		autowire="byName">
-		<constructor-arg>
-			<value>8</value> <! Upload/Download Chunk Size >
-		</constructor-arg>
-	</bean>
-
-	<bean id="permissionManagerRemoting"
-		class="org.opensafety.hishare.managers.implementation.remoting.PermissionManagerImpl"
-		autowire="byName">
-	</bean>
-
-	<bean id="userManagerRemoting"
-		class="org.opensafety.hishare.managers.implementation.remoting.UserManagerImpl"
-		autowire="byName">
-	</bean>
-	-->
 </beans>

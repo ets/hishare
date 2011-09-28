@@ -31,6 +31,8 @@
      http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<context:annotation-config />
 
+	<context:component-scan base-package="org.opensafety.hishare.model"/>
+
 	<!-- Configures the @Controller programming model -->
 	<mvc:annotation-driven />
 

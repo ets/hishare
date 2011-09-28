@@ -26,7 +26,6 @@
 	   /WEB-INF/application-context.xml
 	   /WEB-INF/hishare-dao.xml
 	   /WEB-INF/hishare-manager.xml
-	   /WEB-INF/hishare-factory.xml
 	   /WEB-INF/hishare-service.xml
 	   /WEB-INF/hishare-view.xml
 	   /WEB-INF/hishare-servlet.xml
@@ -48,23 +47,5 @@
 		<servlet-name>hishare</servlet-name>
 		<url-pattern>*.hishare</url-pattern>
 	</servlet-mapping>
-
-
-	<!-- RPC (thru http invoker) Framework -->
-	<!-- Servlets <servlet> <servlet-name>authenticateUserExporter</servlet-name> 
-		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class> 
-		</servlet> <servlet> <servlet-name>authorizeUserExporter</servlet-name> <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class> 
-		</servlet> <servlet> <servlet-name>deleteParcelExporter</servlet-name> <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class> 
-		</servlet> <servlet> <servlet-name>downloadParcelExporter</servlet-name> 
-		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class> 
-		</servlet> <servlet> <servlet-name>uploadParcelExporter</servlet-name> <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class> 
-		</servlet> <! Servlet Mappings > <servlet-mapping> <servlet-name>authenticateUserExporter</servlet-name> 
-		<url-pattern>/user/authenticate</url-pattern> </servlet-mapping> <servlet-mapping> 
-		<servlet-name>authorizeUserExporter</servlet-name> <url-pattern>/user/authorize</url-pattern> 
-		</servlet-mapping> <servlet-mapping> <servlet-name>deleteParcelExporter</servlet-name> 
-		<url-pattern>/parcel/delete</url-pattern> </servlet-mapping> <servlet-mapping> 
-		<servlet-name>downloadParcelExporter</servlet-name> <url-pattern>/parcel/download</url-pattern> 
-		</servlet-mapping> <servlet-mapping> <servlet-name>uploadParcelExporter</servlet-name> 
-		<url-pattern>/parcel/upload</url-pattern> </servlet-mapping> -->
 
 </web-app>

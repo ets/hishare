@@ -18,7 +18,9 @@ package org.opensafety.hishare.model.factories;
 import java.util.UUID;
 
 import org.opensafety.hishare.model.AuthenticationServer;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AuthenticationServerFactory
 {
 	private static String createAuthenticationServerId()
