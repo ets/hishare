@@ -27,7 +27,6 @@
 	   /WEB-INF/hishare-dao.xml
 	   /WEB-INF/hishare-view.xml
 	   /WEB-INF/hishare-servlet.xml
-	   /WEB-INF/hishare-util.xml
 	 </param-value>
 	</context-param>
 

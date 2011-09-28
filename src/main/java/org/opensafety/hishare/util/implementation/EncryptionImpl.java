@@ -35,24 +35,27 @@ import org.apache.commons.codec.binary.Hex;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.opensafety.hishare.model.Parcel;
 import org.opensafety.hishare.util.interfaces.Encryption;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+@Component
 public class EncryptionImpl implements Encryption
 {
-	private int saltLength;
-	private int pbeIterationCount;
-	private int pbeKeyLength;
-	private int passwordLength;
+	private @Value("${encryption.saltLength}") int saltLength;
+	private @Value("${encryption.pbeIterationCount}") int pbeIterationCount;
+	private @Value("${encryption.pbeKeyLength}") int pbeKeyLength;
+	private @Value("${encryption.passwordLength}") int passwordLength;
 	
-	private String randomAlgorithm;
-	private String pbeAlgorithm;
-	private String cipherAlgorithm;
-	private String keyGenerator;
-	private String passwordHashAlgorithm;
+	private @Value("${encryption.randomAlgorithm}") String randomAlgorithm;
+	private @Value("${encryption.pbeAlgorithm}") String pbeAlgorithm;
+	private @Value("${encryption.cipherAlgorithm}") String cipherAlgorithm;
+	private @Value("${encryption.keyGenerator}") String keyGenerator;
+	private @Value("${encryption.passwordHashAlgorithm}") String passwordHashAlgorithm;
 	
 	public EncryptionImpl()
 	{
-		this(64, 1000, 256, 256, "SHA1PRNG", "PBEWITHSHA256AND128BITAES-CBC-BC",
-		     "AES/CBC/PKCS5Padding", "AES", "SHA-512");
+		Security.addProvider(new BouncyCastleProvider());
+		//this(64, 1000, 256, 256, "SHA1PRNG", "PBEWITHSHA256AND128BITAES-CBC-BC", "AES/CBC/PKCS5Padding", "AES", "SHA-512");
 	}
 	
 	public EncryptionImpl(int saltLength, int pbeIterationCount, int passwordLength,
